@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from 'react';
 import Style from './filtradoClick.module.css';
 import Image from 'next/image';
