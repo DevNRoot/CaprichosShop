@@ -1,0 +1,65 @@
+.formSubCategorias {
+  /* border: 2px solid red; */
+  width: 1200px;
+  height: 600px;
+  margin-top: 120px;
+  margin-left: 250px;
+}
+
+.titulo {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.buscadorSubCategoria {
+  border: 2px solid black;
+  border-radius: 7px;
+  width: 150px;
+  height: 35px;
+  padding: 5px;
+}
+
+.contentAddFind {
+  display: flex;
+  gap: 10px;
+}
+
+/* formCategorias.module.css */
+
+.tablaSubCategorias {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.tablaSubCategorias th,
+.tablaSubCategorias td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.tablaSubCategorias th {
+  background-color: #f4f4f4;
+}
+
+.btnAddSubCategorias {
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 180px;
+  height: 35px;
+}
+
+.btnAddSubCategorias:hover {
+  cursor: pointer;
+}
+
+.btnEditar {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+}

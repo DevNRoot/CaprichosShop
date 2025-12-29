@@ -1,0 +1,296 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+/* =====================
+   CATEGORÍAS
+===================== */
+
+model Categoria {
+  id Int @id @default(autoincrement())
+  nombre String
+  estado Int?
+
+  subCategorias SubCategoria[]
+
+  @@map("categorias")
+}
+
+model SubCategoria {
+  id Int @id @default(autoincrement())
+  nombre String
+  estado Int?
+  categoriaId Int @map("id_categorias")
+
+  categoria Categoria @relation(fields: [categoriaId], references: [id])
+  productos Producto[]
+
+  @@map("sub_categorias")
+}
+
+model Marca {
+  idMarca Int @id @default(autoincrement()) @map("id_marca")
+  nombre String
+  estado Int?
+
+  productos Producto[]
+
+  @@map("marcas")
+}
+
+model Color {
+  id Int @id @default(autoincrement())
+  nombre String
+  hexadecimal String
+  estado Int?
+
+  variantes Variante[]
+  detallePreVentas DetallePreVenta[]
+
+  @@map("color")
+}
+
+model Talla {
+  id Int @id @default(autoincrement())
+  nombre String
+  isActivo Boolean @map("isActivo")
+
+  variantes Variante[]
+  detallePreVentas DetallePreVenta[]
+
+  @@map("talla")
+}
+
+model TipoDocumento {
+  id Int @id @default(autoincrement())
+  nombre String
+  isActivo Boolean @map("isActivo")
+
+  compras Compra[]
+
+  @@map("tipo_documento")
+}
+
+model TipoMovimiento {
+  id Int @id @default(autoincrement())
+  nombre String
+  isActivo Boolean @map("isActivo")
+
+  movimientosCaja MovimientoCaja[]
+
+  @@map("tipo_movimiento")
+}
+
+/* =====================
+   PRINCIPALES
+===================== */
+
+model Producto {
+  id Int @id @default(autoincrement())
+  nombre String
+  precioCompra Float @map("precio_compra")
+  precioVenta Float @map("precio_venta")
+  stockTotal Int @map("stock_total")
+  imagen String?
+
+  subCategoriaId Int @map("id_sub_categorias")
+  marcaId Int? @map("id_marca")
+
+  subCategoria SubCategoria @relation(fields: [subCategoriaId], references: [id])
+  marca Marca? @relation(fields: [marcaId], references: [idMarca])
+
+  variantes Variante[]
+  detalleCompras DetalleCompra[]
+  detalleVentas DetalleVenta[]
+  detallePreVentas DetallePreVenta[]
+  cambios Cambio[]
+
+  @@map("producto")
+}
+
+model Variante {
+  id Int @id @default(autoincrement())
+  stock Int
+
+  colorId Int @map("id_color")
+  tallaId Int @map("id_talla")
+  productoId Int @map("id_producto")
+
+  color Color @relation(fields: [colorId], references: [id])
+  talla Talla @relation(fields: [tallaId], references: [id])
+  producto Producto @relation(fields: [productoId], references: [id])
+
+  detalleVentas DetalleVenta[]
+  cambios Cambio[]
+
+  @@map("variante")
+}
+
+model Proveedor {
+  id Int @id @default(autoincrement())
+  razonSocial String @map("razon_social")
+  ruc String
+  direccion String
+  telefono String
+  provincia String
+  departamento String
+
+  compras Compra[]
+
+  @@map("proveedor")
+}
+
+model Cliente {
+  id Int @id @default(autoincrement())
+  nombre String
+  documento String
+
+  ventas Venta[]
+  preVentas PreVenta[]
+
+  @@map("clientes")
+}
+
+/* =====================
+   OPERACIONES
+===================== */
+
+model Compra {
+  id Int @id @default(autoincrement())
+  total Float
+  fechaCompra DateTime @map("fecha_compra")
+
+  proveedorId Int @map("id_proveedor")
+  tipoDocumentoId Int @map("id_tipo_documento")
+
+  proveedor Proveedor @relation(fields: [proveedorId], references: [id])
+  tipoDocumento TipoDocumento @relation(fields: [tipoDocumentoId], references: [id])
+
+  detalleCompras DetalleCompra[]
+
+  @@map("compra")
+}
+
+model Venta {
+  id Int @id @default(autoincrement())
+  fecha DateTime
+  total Float
+  metodoDePago String @map("metodo_de_pago")
+
+  clienteId Int @map("id_cliente")
+  cliente Cliente @relation(fields: [clienteId], references: [id])
+
+  detalleVentas DetalleVenta[]
+
+  @@map("ventas")
+}
+
+model PreVenta {
+  id Int @id @default(autoincrement())
+  total Float
+  estado String
+  fecha DateTime
+
+  clienteId Int @map("id_cliente")
+  cliente Cliente @relation(fields: [clienteId], references: [id])
+
+  detallePreVentas DetallePreVenta[]
+
+  @@map("pre_ventas")
+}
+
+model MovimientoCaja {
+  id Int @id @default(autoincrement())
+  descripcion String
+  motivo String
+
+  tipoMovimientoId Int @map("id_tipo_movimiento")
+  tipoMovimiento TipoMovimiento @relation(fields: [tipoMovimientoId], references: [id])
+
+  @@map("movimiento_caja")
+}
+
+/* =====================
+   DETALLES
+===================== */
+
+model DetalleCompra {
+  id Int @id @default(autoincrement())
+  cantidad Int
+  precioCompra Float @map("precio_compra")
+
+  productoId Int @map("id_producto")
+  compraId Int @map("id_compra")
+
+  producto Producto @relation(fields: [productoId], references: [id])
+  compra Compra @relation(fields: [compraId], references: [id])
+
+  @@map("detalle_compra")
+}
+
+model DetalleVenta {
+  id Int @id @default(autoincrement())
+  cantidad Int
+  precioUnitario Float @map("precio_unitario")
+  total Float
+
+  productoId Int @map("id_producto")
+  ventaId Int @map("id_venta")
+  varianteId Int @map("id_variante")
+
+  producto Producto @relation(fields: [productoId], references: [id])
+  venta Venta @relation(fields: [ventaId], references: [id])
+  variante Variante @relation(fields: [varianteId], references: [id])
+
+  @@map("detalle_venta")
+}
+
+model DetallePreVenta {
+  id Int @id @default(autoincrement())
+  cantidad Int
+  precioUnitario Float @map("precio_unitario")
+  subTotal Float @map("sub_total")
+
+  preVentaId Int @map("pre_venta_id")
+  productoId Int @map("producto_id")
+  tallaId Int @map("talla_id")
+  colorId Int @map("color_id")
+
+  preVenta PreVenta @relation(fields: [preVentaId], references: [id])
+  producto Producto @relation(fields: [productoId], references: [id])
+  talla Talla @relation(fields: [tallaId], references: [id])
+  color Color @relation(fields: [colorId], references: [id])
+
+  @@map("detalle_pre_ventas")
+}
+
+model Cambio {
+  id Int @id @default(autoincrement())
+  cantidad Int
+  observacion String?
+  tipo String
+  fecha DateTime
+
+  productoId Int @map("id_producto")
+  varianteId Int @map("id_variante")
+
+  producto Producto @relation(fields: [productoId], references: [id])
+  variante Variante @relation(fields: [varianteId], references: [id])
+
+  @@map("cambios")
+}
+
+model Usuario {
+  id     Int    @id @default(autoincrement())
+  nombre String @unique
+  cargo  String
+  clave  String
+  estado Int?   @default(1)
+
+  @@map("usuarios")
+}

@@ -1,0 +1,145 @@
+.contentLogin {
+  border-radius: 10px;
+  background-color: white;
+  width: 400px;
+  height: 600px;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 2000;
+}
+
+.contentTituloYCerrar {
+  border-bottom: 2px solid gray;
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+  width: 400px;
+  padding-left: 35px;
+  padding-top: 5px;
+}
+
+.titulo {
+  font-size: 20px;
+}
+
+.logoIMG {
+  width: 180px;
+  height: 50px;
+  margin-left: 110px;
+  margin-top: 80px;
+}
+
+.cerrarSesion {
+  width: 50px;
+  height: 50px;
+}
+
+.cerrarSesion:hover {
+  cursor: pointer;
+}
+
+.apartadoLogeo {
+  /* border: 2px solid blue; */
+  width: 400px;
+  height: 300px;
+}
+
+.formularioLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.selectUsuario {
+  width: 320px;
+  height: 40px;
+  margin-top: 20px;
+}
+
+.inputClave {
+  border: 2px solid black;
+  border-radius: 7px;
+  width: 320px;
+  height: 40px;
+  padding: 10px;
+}
+
+.btnIniciarSesion {
+  border: 2px solid black;
+  border-radius: 7px;
+  width: 320px;
+  height: 40px;
+  padding: 10px;  
+}
+
+.btnIniciarSesion:hover {
+  cursor: pointer;
+  background-color: #f0f0f0;
+}
+
+@media (max-width:768px) {
+  .contentLogin {
+    /* border: 2px solid red; */
+    border-radius: 10px;
+    background-color: white;
+    width: 90%;
+    height: 80%;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    z-index: 2000;
+  }
+
+  .contentTituloYCerrar {
+    border-bottom: 2px solid gray;
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    width: 100%;
+    padding-left: 35px;
+    padding-top: 5px;
+  }
+
+  .apartadoLogeo {
+    /* border: 2px solid blue; */
+    width: 100%;
+    height: 300px;
+  }
+
+  .logoIMG {
+    width: 50%;
+    height: 50px;
+    margin-top: 80px;
+    margin: 30px auto;
+  }
+
+  .selectUsuario {
+    width: 80%;
+    height: 50px;
+  }
+
+  .inputClave {
+    border: 2px solid black;
+    border-radius: 7px;
+    width: 80%;
+    height: 40px;
+    padding: 10px;
+  }
+
+  .btnIniciarSesion {
+    border: 2px solid black;
+    border-radius: 7px;
+    width: 80%;
+    height: 40px;
+    padding: 10px;  
+  }
+}

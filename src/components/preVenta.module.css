@@ -1,0 +1,116 @@
+.contentPreVenta {
+  width: 1400px;
+  height: auto;
+  margin-top: 100px;
+  margin-left: 50px;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.inputYape {
+  border: 2px solid black;
+  border-radius: 7px;
+  width: 50px;
+  height: 20px;
+  margin-left: 5px;
+}
+
+.tituloPreVentas {
+  font-size: 25px;
+  margin-left: 1px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Tabla General */
+.tablaGeneral {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: white;
+}
+
+.tablaGeneral th,
+.tablaGeneral td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: left;
+}
+
+.tablaGeneral th {
+  background-color: #ddd;
+}
+
+/* Subtabla */
+.subTabla {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.subTabla th,
+.subTabla td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+
+.subTabla th {
+  background-color: #eee;
+}
+
+/* ✅ CHECKBOX CORREGIDO */
+.metodoPago input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.eliminar {
+  width: 20px;
+  height: 20px;
+}
+
+.eliminar:hover,
+.añadir:hover {
+  cursor: pointer;
+}
+
+.añadir {
+  width: 20px;
+  height: 20px;
+}
+
+.accionesPreVenta {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.metodoPago {
+  display: flex;
+}
+
+.contentMetodoAddDelete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fotoYape {
+  width: 15px;
+  height: 15px;
+}
+
+.contentYape {
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.contentTarjeta {
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.encabezadoTabla {
+  background-color: yellow;
+}

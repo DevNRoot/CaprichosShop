@@ -1,0 +1,139 @@
+.mantExistencia {
+  /* border: 2px solid red; */
+  width: 1230px;
+  height: 600px;
+
+  margin-top: 120px;
+  margin-left: 250px;
+}
+
+.titulo {
+  font-size: 22px;
+}
+
+.formulario {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.divProducto {
+  display: flex;
+  gap: 120px;
+}
+
+.divAddExistencia {
+  display: flex;
+  gap: 30px;
+}
+
+.divCategoria {
+  display: flex;
+  gap: 105px;
+  /* height: 30px; */
+}
+
+.divSubCategoria {
+  display: flex;
+  gap: 70px;
+  /* height: 30px; */
+}
+
+.divColor {
+  display: flex;
+  gap: 135px;
+}
+
+.divTalla {
+  display: flex;
+  gap: 140px;
+}
+
+.divCantidad {
+  display: flex;
+  gap: 115px;
+}
+
+.inputCantidad {
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 210px;
+  height: 20px;
+  /* padding: 10px; */
+  margin-bottom: 20px;
+}
+
+.divBotones {
+  display: flex;
+  gap: 50px;
+}
+
+.btnGuardarCambios {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.btnGuardarCambios:hover {
+  cursor: pointer;
+}
+
+.btnVerExistencias {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 3px;
+  width: 120px;
+}
+
+.btnVerExistencias:hover {
+  cursor: pointer;
+}
+
+.selectColores {
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 210px;
+}
+
+.selectTallas {
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 210px;
+}
+
+.comboProductos {
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 210px;
+  height: 30px;
+  margin-bottom: 20px;
+}
+
+.textSelectTalla {
+  text-align: center;
+}
+
+.textSelectColor {
+  text-align: center;
+}
+
+.textSelectProducto {
+  text-align: center;
+}
+
+.selectCategoria {
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 210px;
+  height: 30px;
+  margin-bottom: 20px;
+}
+
+.selectSubCategoria {
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 210px;
+  height: 30px;
+  margin-bottom: 20px;
+}

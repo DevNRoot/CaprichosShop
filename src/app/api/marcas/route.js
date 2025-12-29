@@ -1,0 +1,58 @@
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+/* ================= GET ================= */
+export async function GET() {
+  try {
+    const marcas = await prisma.marca.findMany({
+      select: {
+        idMarca: true,
+        nombre: true,
+        estado: true,
+      },
+      orderBy: { idMarca: "asc" },
+    });
+
+    return NextResponse.json(marcas, {
+      headers: {
+        "Cache-Control": "no-store",
+      },
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { mensaje: "Error al obtener marcas" },
+      { status: 500 }
+    );
+  }
+}
+
+/* ================= POST ================= */
+export async function POST(req) {
+  try {
+    const { nombre } = await req.json();
+
+    if (!nombre || typeof nombre !== "string") {
+      return NextResponse.json(
+        { mensaje: "El nombre es obligatorio" },
+        { status: 422 }
+      );
+    }
+
+    const marca = await prisma.marca.create({
+      data: {
+        nombre,
+        estado: 1,
+      },
+    });
+
+    return NextResponse.json(marca, { status: 201 });
+  } catch (error) {
+    return NextResponse.json(
+      { mensaje: "Error al guardar marca" },
+      { status: 500 }
+    );
+  }
+}

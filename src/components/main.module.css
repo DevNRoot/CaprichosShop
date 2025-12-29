@@ -1,0 +1,271 @@
+/*El de aca sirve para que se pueda scrollear en cardDetalle*/
+
+body{
+  /* overflow: hidden; */
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.contenedorMain {
+  /* border: 2px solid red; */
+  background-image: none;
+  background-color: white;
+  height: 600px;
+  overflow: hidden;
+  margin-top: 110px;
+}
+
+.ContainerAllWoman {
+  /* border: 2px solid red; */
+  border-radius: 15px;
+  /* width: 1000px; */
+  width: 1100px;
+  height: 200px;
+
+  margin-top: 50px;
+  /* margin-left: 300px; */
+  margin-left: 250px;
+  left: 500px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.containerLefArrow {
+  border: 2px solid rgba(255, 255, 255, 0.145);
+  background-color: rgba(255, 255, 255, 0.145);
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+}
+
+.containerLefArrow:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.containerRightArrow {
+  border: 2px solid rgba(255, 255, 255, 0.145);
+  background-color: rgba(255, 255, 255, 0.145);
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+}
+
+.containerRightArrow:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.viewAllWoman {
+  /* margin-left: 25px; */
+  /* margin-top: 40px; */
+  margin-top: 40px;
+  font-size: 17px;
+  /* font-weight: bold; */
+  color: purple;
+  text-align: center;
+}
+
+.viewAllMan {
+  /* margin-left: 25px; */
+  /* margin-top: 40px; */
+  margin-top: 40px;
+  font-size: 17px;
+  /* font-weight: bold; */
+  color: purple;
+  text-align: center;
+}
+
+.containerAll {
+  /* border: 2px solid red; */
+  width: 120px;
+  height: 150px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerAll:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.containerWoman {
+  /* border: 2px solid red; */
+  width: 120px;
+  height: 150px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerWoman:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.containerMan {
+  /* border: 2px solid red; */
+  width: 120px;
+  height: 150px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerMan:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.containerImgWoman {
+  border: 2px solid #E5E5E5;
+  border-radius: 100%;
+  width: 120px;
+  height: 120px;
+
+  background-color: #E5E5E5;
+}
+
+.subtituloIMG {
+  color: purple;
+}
+
+.ContainerAllMan {
+  /* border: 2px solid blue; */
+  border-radius: 15px;
+  /* width: 1000px; */
+  width: 1100px;
+  height: 200px;
+
+  margin-top: 80px;
+  /* margin-left: 300px; */
+  margin-left: 250px;
+  left: 500px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.containerImgMan {
+  border: 2px solid #E5E5E5;
+  border-radius: 100%;
+  width: 120px;
+  height: 120px;
+
+  background-color: #E5E5E5;
+}
+
+.leftArrow {
+  width: 15px;
+  height: 15px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.RightArrow {
+  width: 15px;
+  height: 15px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+
+
+
+.imageContainer {
+  display: flex;
+  gap: 30px;
+  overflow: hidden;
+}
+
+.containerImgWoman {
+  border-radius: 50%;
+  border: 2px solid #e5e5e5;
+  width: 120px;
+  height: 120px;
+}
+
+.imagenWoman {
+  border-radius: 50%;
+  border: 2px solid #e5e5e5;
+  width: 120px;
+  height: 120px;
+}
+
+.subtituloIMG {
+  color: black;
+  text-align: center;
+}
+
+.subtituloIMGSubCategoria {
+  color: black;
+}
+
+
+
+@media (max-width: 768px) {
+  .contenedorMain {
+    height: auto;
+    margin-top: 100px;
+  }
+
+  .ContainerAllWoman,
+  .ContainerAllMan {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    margin-left: 0;
+    gap: 20px;
+    padding: 10px;
+    height: auto;
+  }
+
+  .containerAll,
+  .containerWoman,
+  .containerMan {
+    width: 90px;
+    height: 130px;
+    margin: 5px;
+  }
+
+  .containerImgWoman,
+  .containerImgMan,
+  .imagenWoman {
+    width: 90px;
+    height: 90px;
+  }
+
+  .viewAllWoman,
+  .viewAllMan {
+    font-size: 16px;
+    margin-top: 19px;
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .containerLefArrow,
+  .containerRightArrow {
+    display: none;
+  }
+
+  .subtituloIMG {
+    font-size: 12px;
+  }
+}

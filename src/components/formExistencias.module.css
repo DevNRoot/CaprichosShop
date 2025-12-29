@@ -1,0 +1,77 @@
+.contentExistencias {
+  /* border: 2px solid red; */
+  width: 1200px;
+  height: 600px;
+
+  margin-top: 120px;
+  margin-left: 250px;
+}
+
+.buscadorProductos {
+  border: 2px solid black;
+  border-radius: 7px;
+  width: 150px;
+  height: 35px;
+  padding: 5px;
+}
+
+.contentAddFind {
+  display: flex;
+  gap: 10px;
+}
+
+.btnAñadirExistencias {
+  border: 2px solid black;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 3px;
+}
+
+.btnAñadirExistencias:hover {
+  cursor: pointer;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.tabla th,
+.tabla td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+.tabla th {
+  background-color: #f8f8f8;
+  font-weight: bold;
+}
+
+.botonEditar {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.botonEditar:hover {
+  background-color: #218838;
+}
+
+.botonEliminar {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.botonEliminar:hover {
+  background-color: #c82333;
+}

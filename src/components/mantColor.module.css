@@ -1,0 +1,79 @@
+.contentColor {
+  /* border: 2px solid green; */
+  width: 1100px;
+  height: 600px;
+  margin-top: 120px;
+  margin-left: 250px;
+}
+
+.contentTalla {
+  /* border: 2px solid red; */
+  width: 1100px;
+  height: 600px;
+
+  margin-top: 100px;
+  margin-left: 250px;
+}
+
+.contentSubCategoria {
+  /* border: 2px solid red; */
+  width: 1200px;
+  height: 600px;
+
+  margin-top: 100px;
+  margin-left: 250px;
+}
+
+.titulo {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.divNombreColor {
+  display: flex;
+  gap: 75px;
+}
+
+.inputColores {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 3px;
+  width: 170px;
+  height: 25px;
+}
+
+.divSelectColor {
+  display: flex;
+  gap: 45px;
+
+  margin-bottom: 25px;
+}
+
+.comboTalla {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 3px;
+  width: 150px;
+  height: 30px;
+}
+
+.contentBotones {
+  display: flex;
+  gap: 20px;
+}
+
+.btnGuardar {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.btnGuardar:hover {
+  cursor: pointer;
+}

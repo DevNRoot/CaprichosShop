@@ -1,0 +1,297 @@
+/* .contenedorCarrito {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 350px;
+  height: 100%;
+  background-color: white;
+  z-index: 1001;
+  padding: 20px;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+  overflow-y: auto;
+  border-radius: 7px;
+} */
+
+.contenedorCarrito {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 350px;
+  height: 100%;
+  background-color: #ffffff; /* carrito claro */
+  z-index: 1300; /* 👈 MÁS alto que el overlay */
+  padding: 20px;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+  overflow-y: auto;
+  border-radius: 7px;
+}
+
+
+.textNameClient {
+  margin-left: 5px;
+}
+
+.inputNameClient {
+  border: 2px solid black;
+  border-radius: 3px;
+  width: 120px;
+  height: 17px;
+  padding: 3px;
+  font-size: 15px;
+  margin-left: 8px;
+}
+
+.inputNameDniRuc {
+  border: 2px solid black;
+  border-radius: 3px;
+  width: 120px;
+  height: 17px;
+  padding: 3px;
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+.topCarrito {
+  /* border: 2px solid green; */
+  width: 300px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.titulo {
+  color: black;
+  font-size: 16px;
+  margin-left: 5px;
+}
+
+.estilobtnCerrar {
+  border: 2px solid black;
+  border-radius: 7px;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+}
+
+.estilobtnCerrar:hover {
+  cursor: pointer;
+}
+
+.contenedorProductosAdd {
+  /* border: 2px solid green; */
+  margin-left: 5px;
+  margin-top: 10px;
+  width: 300px;
+  min-height: 250px;
+  height: auto;
+}
+
+
+
+.fotoLogo {
+  width: 130px;
+  height: 30px;
+
+  border-radius: 7px;
+}
+
+.estiloContentImagen {
+  /* border: 2px solid black; */
+  border-radius: 5px;
+  width: 45px;
+  height: 45px;
+  margin-top: 5px;
+}
+
+.imagen {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.estiloImagenCarrito {
+  border: 2px solid black;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.contenedorItems {
+  /* border: 2px solid red; */
+}
+
+.estiloItemCarrito {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.229);
+  /* border: 2px solid black; */
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nombreProducto {
+  color: black;
+  /* font-weight: bold; */
+  font-size: 17px;
+  text-transform: uppercase;
+}
+
+.precioProducto {
+  color: red;
+}
+
+.subtotalLetra {
+  color: red;
+}
+
+.estiloContentIMGNamePrice {
+  /* border: 2px solid green; */
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.estiloContentColorTallaCantidad {
+  /* border: 2px solid green; */
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.productoUnitario {
+  color: black;
+}
+
+.nombrePProducto {
+  font-size: 17px;
+}
+
+.contentBotones {
+  /* border: 2px solid red; */
+  width: 315px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 10px;
+}
+
+.botonEliminar {
+  border-radius: 7px;
+  width: 25px;
+  color: white;
+  height: 15px;
+}
+
+.botonEliminar:hover {
+  cursor: pointer;
+}
+
+.botonPreventa {
+  /* border: 2px solid green; */
+  border-radius: 7px;
+  width: 100px;
+  background-color: purple;
+  color: white;
+  height: 30px;
+}
+
+.botonPreventa:hover {
+  cursor: pointer;
+}
+
+.precioUnitario {
+  color: black;
+}
+
+.contentPrecioUnitario {
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: end;
+}
+
+.estiloContentSubTotal {
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: end;
+  margin-bottom: 15px;
+}
+
+.botonPreventa {
+  width: 320px;
+  height: 35px;
+}
+
+.NoProductsCarrito {
+  margin-left: 5px;
+}
+
+.subTotalItem {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.subTotalItem p {
+  color: red;
+  font-weight: 500;
+}
+
+
+@media (max-width: 768px) {
+  .contenedorCarrito {
+    position: fixed;
+    top: 0;
+    right: 0;
+    /* width: 350px; */
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 1001;
+    padding: 20px;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+    overflow-y: auto;
+    border-radius: 7px;
+  }
+
+  .contentBotones {
+    /* border: 2px solid red; */
+    width: 100%;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .topCarrito {
+    /* border: 2px solid green; */
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .contentBotonPreventa {
+    /* border: 2px solid green; */
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .botonPreventa {
+    /* border: 2px solid green; */
+    border-radius: 7px;
+    width: 100%;
+    background-color: purple;
+    color: white;
+    height: 35px;
+  }
+}

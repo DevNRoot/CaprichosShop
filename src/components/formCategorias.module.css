@@ -1,0 +1,52 @@
+.formCategorias {
+  /* border: 2px solid red; */
+  width: 1200px;
+  height: 600px;
+  margin-top: 120px;
+  margin-left: 250px;
+}
+
+.titulo {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+/* formCategorias.module.css */
+
+.tablaCategorias {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.tablaCategorias th,
+.tablaCategorias td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.tablaCategorias th {
+  background-color: #f4f4f4;
+}
+
+.btnAddCategorias {
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 150px;
+  height: 35px;
+}
+
+.btnAddCategorias:hover {
+  cursor: pointer;
+}
+
+.btnEditar {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+}

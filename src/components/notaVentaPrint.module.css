@@ -1,0 +1,69 @@
+.contentNotaVenta {
+  font-family: 'Courier New', monospace;
+  width: 300px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.titulo {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.linea {
+  border-bottom: 1px dashed #000;
+  margin: 10px 0;
+}
+
+.detalles p {
+  margin: 5px 0;
+}
+
+.detalles p strong {
+  display: inline-block;
+  width: 120px;
+}
+
+.btnImprimirNota {
+  margin-top: 20px;
+  padding: 8px;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* ========================= */
+/* ESTILOS DE IMPRESIÓN */
+/* ========================= */
+
+@media print {
+  :global(body) {
+    margin: 0;
+  }
+
+  :global(body *) {
+    visibility: hidden;
+  }
+
+  .contentNotaVenta,
+  .contentNotaVenta * {
+    visibility: visible;
+  }
+
+  .contentNotaVenta {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30%;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+  }
+
+  .btnImprimirNota {
+    display: none;
+  }
+}

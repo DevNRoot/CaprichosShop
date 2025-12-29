@@ -1,0 +1,81 @@
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+
+/**
+ * GET /api/subCategorias
+ * Laravel: index()
+ */
+export async function GET() {
+  try {
+    const subCategorias = await prisma.subCategoria.findMany({
+      select: {
+        id: true,
+        nombre: true,
+        estado: true,
+        categoriaId: true,
+        categoria: {
+          select: {
+            id: true,
+            nombre: true,
+          },
+        },
+      },
+    });
+
+    return NextResponse.json(subCategorias);
+  } catch (error) {
+    return NextResponse.json(
+      { mensaje: "Error al obtener subcategorías" },
+      { status: 500 }
+    );
+  }
+}
+
+/**
+ * POST /api/subCategorias
+ * Laravel: guardarSubCategorias()
+ */
+export async function POST(req) {
+  try {
+    const body = await req.json();
+    const { nombre, id_categorias } = body;
+
+    if (!nombre || typeof nombre !== "string") {
+      return NextResponse.json(
+        { mensaje: "El nombre es obligatorio" },
+        { status: 422 }
+      );
+    }
+
+    if (!id_categorias || isNaN(Number(id_categorias))) {
+      return NextResponse.json(
+        { mensaje: "La categoría es obligatoria" },
+        { status: 422 }
+      );
+    }
+
+    const subCategoria = await prisma.subCategoria.create({
+      data: {
+        nombre,
+        estado: 1,
+        categoriaId: Number(id_categorias),
+      },
+    });
+
+    return NextResponse.json(
+      {
+        mensaje: "subCategoria guardada con éxito",
+        subCategoria,
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      {
+        error: "Error interno",
+        mensaje: error.message,
+      },
+      { status: 500 }
+    );
+  }
+}

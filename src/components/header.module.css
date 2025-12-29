@@ -1,0 +1,306 @@
+/* body {
+  overflow: hidden;
+} */
+
+.contenedorHeader {
+  /* border: 2px solid blue; */
+  background-image: none;
+  height: 130px;
+  /* background-color: black; */
+  background-color: white;
+  border-bottom: 2px solid rgba(128, 128, 128, 0.263);
+
+  display: flex;
+  align-items: center;
+
+  width: 1530px;
+  height: 90px;
+  height: 110px;
+  position: fixed;
+  z-index: 10;
+  top: 0px;
+}
+
+.logoIMG {
+  width: 130px;
+  height: 30px;
+
+  border-radius: 7px;
+  margin-left: 30px;
+}
+
+.logoIMG:hover {
+  cursor: pointer;
+}
+
+.btnIniciarSesion {
+  /* border: 2px solid purple; */
+  border: none;
+  border-radius: 5px;
+  width: 100px;
+  height: 30px;
+  color: black;
+
+  /* margin-left: 460px; */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btnIniciarSesion:hover {
+  background-color: purple;
+  color: white;
+  cursor: pointer;
+}
+
+.contenedorHeaderOpciones {
+  /* border: 2px solid red; */
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 230px;
+  height: 40px;
+
+  margin-left: 700px;
+}
+
+.iconCarrito {
+  width: 40px;
+  height: 40px;
+}
+
+.iconCarrito:hover {
+  cursor: pointer;
+}
+
+.iconReportes {
+  width: 30px;
+  height: 30px;
+}
+
+.iconReportes:hover{
+  cursor: pointer;
+}
+
+.iconHamburguesa {
+  width: 35px;
+  height: 35px;
+  margin-left: 80px;
+}
+
+.iconHamburguesa:hover {
+  cursor: pointer;
+}
+
+.menuLetra {
+  color: black;
+  font-size: 18px;
+}
+
+.usuarioInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 35px;
+}
+
+.iconUsuario {
+  width: 40px;
+  height: 40px;
+}
+
+.iconUsuario:hover {
+  cursor: pointer;
+}
+
+.botonCerrarSesion:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.containerLogoHamburguesa {
+  /* border: 2px solid green; */
+  width: 600px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.buscadorPrendas {
+  /* border: 2px solid black; */
+  /* width: 650px; */
+  width: 800px;
+  height: 50px;
+
+  position: absolute;
+  left: 425px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputBuscador {
+  border: 1px solid black;
+  border-right: none;
+  border-radius: 7px 0 0 7px;
+  width: 500px;
+  height: 40px;
+  /* height: 20px; */
+  padding: 10px;
+}
+
+.containerBuscador {
+  border: 1px solid black;
+  border-radius: 7px;
+  border-radius: 0 7px 7px 0; 
+  /* border-left: none; */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgLupa {
+  width: 35px;
+  height: 35px;
+}
+
+
+
+@media (max-width: 768px) {
+  .contenedorHeader {
+    /* border: 2px solid red; */
+    width: 100%;
+    /* height: 80px; */
+    height: 100px;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0 10px;
+    border-bottom: 2px solid rgba(128, 128, 128, 0.263);
+  }
+
+  .containerLogoHamburguesa {
+    /* border: 2px solid green; */
+    width: 150px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .logoIMG {
+    width: 100px;
+    height: auto;
+    margin-left: 0;
+  }
+
+  .contenedorHeaderOpciones {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: auto;
+    height: auto;
+    margin-left: 0;
+    margin-top: 7px;
+    border: none;
+  }
+
+  .iconCarrito {
+    width: 28px;
+    height: 28px;
+  }
+
+  .iconHamburguesa {
+    width: 28px;
+    height: 28px;
+    margin-left: 1px;
+  }
+
+  .menuLetra {
+    font-size: 14px;
+    margin-left: 5px;
+    display: none;
+  }
+
+  .usuarioInfo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: 0;
+  }
+
+  .iconUsuario {
+    width: 32px;
+    height: 32px;
+  }
+
+  .btnIniciarSesion {
+    width: 85px;
+    height: 28px;
+    font-size: 13px;
+    padding: 3px 5px;
+  }
+
+  .menuUsuario {
+    position: absolute;
+    top: 80px;
+    right: 10px;
+    background-color: white;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .botonCerrarSesion {
+    font-size: 14px;
+    padding: 5px 10px;
+    border: none;
+    background: none;
+  }
+
+  .buscadorPrendas {
+    /* border: 2px solid black; */
+    width: 100%;
+    height: 35px;
+
+    position: absolute;
+    left: 1px;
+    top: 50px;
+
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: center; */
+  }
+
+  .inputBuscador {
+    border: 1px solid black;
+    border-right: none;
+    border-radius: 7px 0 0 7px;
+    width: 85%;
+    height: 40px;
+    /* padding: 10px; */
+  }
+
+  .containerBuscador {
+    border: 1px solid black;
+    border-radius: 7px;
+    border-radius: 0 7px 7px 0; 
+    /* border-left: none; */
+    /* width: 40px; */
+    width: 10%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

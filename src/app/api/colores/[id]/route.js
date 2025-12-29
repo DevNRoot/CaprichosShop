@@ -1,0 +1,57 @@
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+
+/* ===============================
+   GET /api/colores/[id]
+=============================== */
+export async function GET(_req, { params }) {
+  const { id } = await params; // 🔥 CLAVE
+
+  const colorId = Number(id);
+  if (isNaN(colorId)) {
+    return NextResponse.json(
+      { mensaje: "ID inválido" },
+      { status: 400 }
+    );
+  }
+
+  const color = await prisma.color.findUnique({
+    where: { id: colorId },
+  });
+
+  if (!color) {
+    return NextResponse.json(
+      { mensaje: "Color no encontrado" },
+      { status: 404 }
+    );
+  }
+
+  return NextResponse.json(color);
+}
+
+/* ===============================
+   PUT /api/colores/[id]
+=============================== */
+export async function PUT(req, { params }) {
+  try {
+    const { id } = await params; // 🔥 CLAVE
+    const colorId = Number(id);
+    const body = await req.json();
+
+    const color = await prisma.color.update({
+      where: { id: colorId },
+      data: {
+        nombre: body.nombre,
+        hexadecimal: body.hexadecimal,
+        estado: body.estado,
+      },
+    });
+
+    return NextResponse.json(color);
+  } catch (error) {
+    return NextResponse.json(
+      { mensaje: "Error al actualizar color" },
+      { status: 500 }
+    );
+  }
+}

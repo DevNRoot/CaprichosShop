@@ -1,0 +1,120 @@
+.contentPreVenta {
+  /* border: 2px solid black; */
+  width: 1400px;
+  height: auto;
+  margin-top: 100px;
+  margin-left: 50px;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.btnNotaDeVenta {
+  padding: 10px;
+  width: 100%;
+}
+
+.btnNotaDeVenta:hover {
+  cursor: pointer;
+}
+
+.divOculto {
+  display: none;
+}
+
+.filtroMetodosDePago {
+  margin-top: 10px;
+  /* border: 2px solid black; */
+  border-radius: 7px;
+}
+
+.filtrosFechas {
+  display: flex;
+  gap: 10px;
+}
+
+.btnClearFilter {
+  border: 2px solid black;
+  border-radius: 4px;
+  padding: 3px;
+}
+
+.textClearFilter {
+  font-size: 14px;
+}
+
+.inputStock {
+  border: 2px solid black;
+  border-radius: 7px;
+  width: 50px;
+  padding: 5px;
+}
+
+.filtroMetodosDePago {
+  display: flex;
+  flex-direction: column;
+}
+
+.tablaProductStock {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.tablaProductStock th,
+.tablaProductStock td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.tablaProductStock th {
+  background-color: #f4f4f4;
+}
+
+.filtroCheckBox {
+  display: flex;
+  gap: 10px;
+}
+
+.tituloPreVentas {
+  font-size: 25px;
+  margin-left: 1px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Tabla General */
+.tablaGeneral {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: white;
+}
+
+.tablaGeneral th, .tablaGeneral td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: left;
+}
+
+.tablaGeneral th {
+  background-color: #ddd;
+}
+
+/* Subtabla */
+.subTabla {
+  /* border: 2px solid red; */
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.subTabla th, .subTabla td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+
+.subTabla th {
+  background-color: #eee;
+}

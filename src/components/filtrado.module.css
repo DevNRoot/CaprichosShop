@@ -1,0 +1,41 @@
+.contentFiltrado {
+  background-color: #ffffff;
+  border-radius: 10px;
+  width: 210px;
+  height: fit-content;
+  margin-left: 60px;
+}
+
+.contentTitulo {
+  background-color: purple;
+  height: 40px;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.contentGenero {
+  border-bottom: 2px solid rgba(128, 128, 128, 0.3);
+  width: 190px;
+  height: 50px;
+  margin: 15px auto;
+  display: flex;
+  align-items: center;
+}
+
+.ContentGeneroData,
+.ContentCategoriaData {
+  width: 190px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .contentTitulo {
+    display: none;
+  }
+}

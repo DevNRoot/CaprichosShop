@@ -4,7 +4,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -13,13 +13,14 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
+     "baseUrl": ".",
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["src/*"]
     }
   },
   "include": [
@@ -29,6 +30,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "src/app/layout.jsx", "src/app/page.jsx", "next.config.js"  ],
   "exclude": ["node_modules"]
 }

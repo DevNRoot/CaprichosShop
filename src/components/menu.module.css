@@ -1,0 +1,193 @@
+.contentMenu {
+  border: 2px solid rgba(0, 0, 0, 0.279);
+  border-radius: 7px;
+  width: 170px;
+  height: 300px;
+
+  position: fixed; 
+  left: 250px;
+  top: 70px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  z-index: 10002;
+  background-color: white;
+}
+
+.contentPreventa {
+  width: 170px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+}
+
+.contentPreventa:hover {
+  cursor: pointer;
+  border-radius: 7px;
+  background-color: rgba(128, 128, 128, 0.119);
+}
+
+.contentVentas {
+  width: 170px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+}
+
+.contentVentas:hover {
+  cursor: pointer;
+  border-radius: 7px;
+  background-color: rgba(128, 128, 128, 0.119);
+}
+
+.contentMantenimientoProductos {
+  width: 170px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+}
+
+.contentMantenimientoProductos:hover {
+  cursor: pointer;
+  border-radius: 7px;
+  background-color: rgba(128, 128, 128, 0.119);
+}
+
+.contentMantenimientoMarcas {
+  width: 170px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+}
+
+.contentMantenimientoMarcas:hover {
+  cursor: pointer;
+  border-radius: 7px;
+  background-color: rgba(128, 128, 128, 0.119);
+}
+
+.contentMantenimientoCategorias{
+  width: 170px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+}
+
+.contentMantenimientoCategorias:hover {
+  cursor: pointer;
+  border-radius: 7px;
+  background-color: rgba(128, 128, 128, 0.119);
+}
+
+.contentMantenimientoSubCategorias {
+  width: 170px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+}
+
+.contentMantenimientoSubCategorias:hover {
+  cursor: pointer;
+  border-radius: 7px;
+  background-color: rgba(128, 128, 128, 0.119);
+}
+
+.contentMantenimientoTallas {
+  width: 170px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+}
+
+.contentMantenimientoTallas:hover {
+  cursor: pointer;
+  border-radius: 7px;
+  background-color: rgba(128, 128, 128, 0.119);
+}
+
+.contentMantenimientoColor {
+  width: 170px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+}
+
+.contentMantenimientoColor:hover {
+  cursor: pointer;
+  border-radius: 7px;
+  background-color: rgba(128, 128, 128, 0.119);
+}
+
+.contentMantenimientoUsuario {
+  width: 170px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+}
+
+.contentMantenimientoUsuario:hover {
+  cursor: pointer;
+  border-radius: 7px;
+  background-color: rgba(128, 128, 128, 0.119);
+}
+
+.contentMantenimientoMarcas {
+  width: 170px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+}
+
+.contentMantenimientoMarcas {
+  cursor: pointer;
+  border-radius: 7px;
+  /* background-color: rgba(128, 128, 128, 0.119); */
+}
+
+.disabled {
+  pointer-events: none;  
+  opacity: 0.5;         
+  cursor: not-allowed;   
+}
+
+@media (max-width: 768px) {
+  .contentMenu {
+    border: 2px solid rgba(0, 0, 0, 0.279);
+    border-radius: 7px;
+    width: 170px;
+    height: 300px;
+
+    position: fixed; 
+    left: 30%;
+    top: 60px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    z-index: 10002;
+    background-color: white;
+  }
+}
