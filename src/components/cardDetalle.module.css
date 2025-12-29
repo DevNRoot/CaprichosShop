@@ -407,18 +407,19 @@
 
 /* ================= SWIPER FLECHAS (MINIMAL GRIS) ================= */
 
-:global(.swiper-button-next),
+/*LO MOVI AL GLOBAL.CSS*/
+/* :global(.swiper-button-next),
 :global(.swiper-button-prev) {
-  color: #9e9e9e;       /* gris */
+  color: #9e9e9e;       
   width: 30px;
   height: 30px;
   top: 50%;
   transform: translateY(-50%);
   z-index: 20;
-}
+} */
 
-/* Posición */
-:global(.swiper-button-next) {
+
+/* :global(.swiper-button-next) {
   right: -15px;
 }
 
@@ -426,18 +427,18 @@
   left: -15px;
 }
 
-/* Flecha */
+
 :global(.swiper-button-next::after),
 :global(.swiper-button-prev::after) {
   font-size: 22px;
   font-weight: bold;
 }
 
-/* Hover suave */
+
 :global(.swiper-button-next:hover),
 :global(.swiper-button-prev:hover) {
   color: #6f6f6f;
-}
+} */
 
 
 /* ================= RESPONSIVE ================= */

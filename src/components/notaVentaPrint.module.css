@@ -40,13 +40,13 @@
 /* ========================= */
 
 @media print {
-  :global(body) {
+  /* :global(body) {
     margin: 0;
   }
 
   :global(body *) {
     visibility: hidden;
-  }
+  } */
 
   .contentNotaVenta,
   .contentNotaVenta * {

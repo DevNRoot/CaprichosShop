@@ -53,3 +53,44 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
 }
+
+/* ================= SWIPER FLECHAS ================= */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #9e9e9e;
+  width: 30px;
+  height: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+}
+:global(.swiper-button-next) {
+  right: -15px;
+}
+
+:global(.swiper-button-prev) {
+  left: -15px;
+}
+
+
+:global(.swiper-button-next::after),
+:global(.swiper-button-prev::after) {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+
+:global(.swiper-button-next:hover),
+:global(.swiper-button-prev:hover) {
+  color: #6f6f6f;
+}
+
+@media print {
+  :global(body) {
+    margin: 0;
+  }
+
+  :global(body *) {
+    visibility: hidden;
+  }
+}
