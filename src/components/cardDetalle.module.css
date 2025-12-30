@@ -1,4 +1,4 @@
-.contentCardDetalle {
+/* .contentCardDetalle {
   width: 100vw;
   min-height: 100vh;
   display: flex;
@@ -9,7 +9,7 @@
   overflow-x: hidden;
   position: relative;
   background-color: #f2f2f263;
-}
+} */
 
 .contentTituloCardDetalle {
   background-color: black;
