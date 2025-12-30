@@ -143,3 +143,42 @@
 /* .disabled {
   display: none;
 } */
+
+@media (max-width: 768px) {
+  .mantProductos {
+    margin-top: 80px;
+    padding: 15px;
+  }
+
+  .formulario {
+    gap: 20px;
+  }
+
+  .divCategoria,
+  .divSubCategoria,
+  .divProducto,
+  .divPrecioCompra,
+  .divPrecioVenta,
+  .divImagen {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .selectCategoria,
+  .selectSubCategoria,
+  .inputProducto,
+  .inputImagen {
+    width: 100%;
+  }
+
+  .divBotones {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btnAgregarProducto,
+  .btnverProductos,
+  .btnAñadirExistencia {
+    width: 100%;
+  }
+}
