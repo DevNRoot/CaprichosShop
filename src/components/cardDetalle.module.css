@@ -291,7 +291,7 @@
   overflow-x: hidden;
   position: relative;
   background-color: #f2f2f263;
-  /* border: 2px solid red; */
+  border: 2px solid red;
 }
 
 /* ================= TITULO ================= */
