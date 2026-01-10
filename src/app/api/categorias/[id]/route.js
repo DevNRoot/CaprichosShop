@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
  * GET /api/categorias/{id}
  */
 export async function GET(_req, context) {
-  const params = await context.params; // ✅ CLAVE
+  const params = await context.params; 
   const id = Number(params.id);
 
   if (isNaN(id)) {
@@ -16,7 +16,7 @@ export async function GET(_req, context) {
   }
 
   const categoria = await prisma.categoria.findUnique({
-    where: { id: id }, // 👈 tu modelo usa "id"
+    where: { id: id }, 
   });
 
   if (!categoria) {
@@ -33,7 +33,7 @@ export async function GET(_req, context) {
  * PUT /api/categorias/{id}
  */
 export async function PUT(req, context) {
-  const params = await context.params; // ✅ CLAVE
+  const params = await context.params; 
   const id = Number(params.id);
 
   if (isNaN(id)) {

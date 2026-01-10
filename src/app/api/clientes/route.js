@@ -38,6 +38,5 @@ export async function POST(req) {
     },
   });
 
-  // 🔥 DEVOLVEMOS EL CLIENTE COMPLETO
   return NextResponse.json(cliente, { status: 201 });
 }
