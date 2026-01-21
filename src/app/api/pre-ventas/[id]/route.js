@@ -9,7 +9,6 @@ export const revalidate = 0;
  */
 export async function DELETE(_req, context) {
   try {
-    // 🔥 params es PROMESA
     const { id } = await context.params;
     const preVentaId = Number(id);
 
@@ -20,7 +19,6 @@ export async function DELETE(_req, context) {
       );
     }
 
-    // 🔥 BORRAR EN ORDEN (FK)
     await prisma.$transaction([
       prisma.detallePreVenta.deleteMany({
         where: { preVentaId },

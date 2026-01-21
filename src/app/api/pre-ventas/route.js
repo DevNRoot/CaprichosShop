@@ -9,7 +9,6 @@ export async function POST(req) {
     const body = await req.json();
     const { productos, total, id_cliente } = body;
 
-    // ✅ Validaciones básicas
     if (!Array.isArray(productos) || productos.length === 0) {
       return NextResponse.json(
         { error: "Productos inválidos" },
@@ -24,7 +23,6 @@ export async function POST(req) {
       );
     }
 
-    // ✅ Validar que TODOS los productos tengan IDs obligatorios
     for (const p of productos) {
       if (
         !p.producto_id ||
@@ -43,7 +41,6 @@ export async function POST(req) {
       }
     }
 
-    // ✅ Transacción segura
     await prisma.$transaction(async (tx) => {
       // Crear pre venta
       const preVenta = await tx.preVenta.create({

@@ -7,7 +7,7 @@ import API_URL from "../config";
 
 export default function MantUsuario() {
   const router = useRouter();
-  const { id } = useParams(); // ✅ App Router
+  const { id } = useParams(); 
 
   const [nombreUsuario, setNombreUsuario] = useState("");
   const [cargo, setCargo] = useState("");

@@ -1,4 +1,4 @@
-"use client";   // Necesario para Zustand en Next.js
+"use client";
 
 import { create } from "zustand";
 import APP_URL from "../config";

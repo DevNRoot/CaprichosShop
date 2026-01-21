@@ -6,7 +6,7 @@ import Style from "./mantColor.module.css";
 
 export default function MantColor() {
   const router = useRouter();
-  const { id } = useParams(); // ✅ AQUÍ ESTÁ LA CLAVE
+  const { id } = useParams(); 
 
   const [nombreColor, setNombreColor] = useState("");
   const [hexadecimal, setHexadecimal] = useState("");

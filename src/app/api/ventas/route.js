@@ -14,7 +14,7 @@ export async function POST(req) {
       total,
       metodo_de_pago,
       id_cliente,
-      detalles, // 👈 MUY IMPORTANTE
+      detalles, 
     } = body;
 
     if (

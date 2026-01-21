@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 export async function GET(_req, { params }) {
-  const { id } = await params; // ✅ CLAVE
+  const { id } = await params; 
   const subCategoriaId = Number(id);
 
   if (isNaN(subCategoriaId)) {

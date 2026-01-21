@@ -28,7 +28,6 @@ export default function ClientLayout({ children }) {
     <>
       <Header />
 
-      {/* ✅ MENÚ */}
       {mostrarMenu && (
         <>
           <div
@@ -44,10 +43,8 @@ export default function ClientLayout({ children }) {
         </>
       )}
 
-      {/* ✅ CONTENIDO */}
       <main>{children}</main>
 
-      {/* ✅ CARRITO */}
       {mostrarCarrito && (
         <>
           {/* OVERLAY */}
@@ -66,7 +63,6 @@ export default function ClientLayout({ children }) {
         </>
       )}
 
-      {/* ✅ LOGIN */}
       {mostrarLogin && (
         <>
           <div

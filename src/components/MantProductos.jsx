@@ -7,7 +7,7 @@ import Style from "./mantProductos.module.css";
 export default function MantProductos() {
   const router = useRouter();
   const params = useParams();
-  const id = params?.id ?? null; // 👈 ID REAL DESDE LA URL
+  const id = params?.id ?? null;
 
   // ===============================
   // ESTADOS

@@ -73,7 +73,6 @@ export async function PUT(req) {
         : null,
     };
 
-    // 🖼 SUBIR IMAGEN A CLOUDINARY
     const imagen = formData.get("imagen");
 
     if (imagen && typeof imagen === "object") {

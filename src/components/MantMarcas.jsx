@@ -6,7 +6,7 @@ import Style from "./mantMarcas.module.css";
 
 export default function MantMarcas() {
   const router = useRouter();
-  const { id } = useParams(); // 🔥 AQUÍ ESTÁ LA CLAVE
+  const { id } = useParams();
 
   const [nombreMarca, setNombreMarca] = useState("");
   const [loading, setLoading] = useState(false);

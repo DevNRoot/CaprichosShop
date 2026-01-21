@@ -48,7 +48,6 @@ export default function CardDetalle() {
 
         setVariantes(variantesProducto);
 
-        /* ✅ PRIMER COLOR + TALLA ACTIVOS */
         const varianteInicial = variantesProducto.find(
           (v) =>
             v.color?.estado === 1 &&

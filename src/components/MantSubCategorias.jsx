@@ -6,7 +6,7 @@ import Style from "./mantSubCategorias.module.css";
 
 export default function MantSubCategorias() {
   const router = useRouter();
-  const { id } = useParams(); // ✅ FORMA CORRECTA
+  const { id } = useParams(); 
 
   const [subCategoria, setSubCategoria] = useState("");
   const [categorias, setCategorias] = useState([]);

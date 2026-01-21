@@ -6,7 +6,7 @@ import Style from "./mantTalla.module.css";
 
 export default function MantTalla() {
   const router = useRouter();
-  const { id } = useParams(); // ✅ CORRECTO
+  const { id } = useParams(); 
 
   const [guardarTalla, setGuardarTalla] = useState("");
 

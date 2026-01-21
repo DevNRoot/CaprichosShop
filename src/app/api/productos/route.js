@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { v2 as cloudinary } from "cloudinary";
 
-// ✅ CONFIGURACIÓN CORRECTA
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -47,7 +46,6 @@ export async function POST(req) {
     let imageUrl = null;
     const imagen = formData.get("imagen");
 
-    // 🖼 SUBIR IMAGEN
     if (imagen && typeof imagen === "object") {
       const buffer = Buffer.from(await imagen.arrayBuffer());
 

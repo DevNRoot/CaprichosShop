@@ -6,7 +6,6 @@ import { prisma } from "@/lib/prisma";
  */
 export async function GET(req) {
   try {
-    // ✅ EXTRAER ID DESDE LA URL (100% fiable)
     const id = Number(req.nextUrl.pathname.split("/").pop());
 
     if (!id || isNaN(id)) {
