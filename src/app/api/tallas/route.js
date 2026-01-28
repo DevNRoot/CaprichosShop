@@ -43,7 +43,7 @@ export async function POST(req) {
     return NextResponse.json(
       {
         mensaje: "Talla guardada con éxito",
-        categoria: talla, // mantengo el mismo key que usabas en Laravel
+        categoria: talla, 
       },
       { status: 201 }
     );

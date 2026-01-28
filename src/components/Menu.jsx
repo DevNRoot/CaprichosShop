@@ -36,7 +36,7 @@ export default function Menu() {
         Ventas
       </div>
 
-      {usuario.cargo !== "vendedor" ? (
+      {usuario.cargo !== "Vendedor" ? (
         <>
           <div
             className={Style.contentMantenimientoProductos}
@@ -88,9 +88,7 @@ export default function Menu() {
           </div>
         </>
       ) : (
-        <div className={Style.disabled}>
-          Acceso restringido
-        </div>
+        <div className={Style.disabled}></div>
       )}
     </aside>
   );

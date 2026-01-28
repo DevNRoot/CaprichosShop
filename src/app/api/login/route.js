@@ -25,8 +25,8 @@ export async function POST(req) {
     // 🔍 Buscar usuario (SIN mode: insensitive)
     const usuario = await prisma.Usuario.findFirst({
       where: {
-        nombre: nombre, // ← CLAVE
-        estado: 1,
+        nombre: nombre
+        // estado: 1,
       },
     });
 
@@ -58,7 +58,11 @@ export async function POST(req) {
       { status: 200 }
     );
   } catch (error) {
-    console.error("LOGIN ERROR:", error);
+    // console.error("LOGIN ERROR:", error);
+    console.error("🔥 LOGIN ERROR COMPLETO 🔥");
+  console.error(error);
+  console.error("message:", error?.message);
+  console.error("stack:", error?.stack);
 
     return NextResponse.json(
       { message: "Error interno del servidor" },

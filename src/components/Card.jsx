@@ -3,6 +3,25 @@
 import Image from "next/image";
 import styles from "./card.module.css";
 
+const PLACEHOLDER = "/images/placeholder.jpg";
+
+function normalizarImagen(src) {
+  if (!src) return PLACEHOLDER;
+
+  // URL completa (Cloudinary)
+  if (src.startsWith("http")) {
+    return src;
+  }
+
+  // Ruta relativa sin slash
+  if (!src.startsWith("/")) {
+    return `/${src}`;
+  }
+
+  // Ruta relativa correcta
+  return src;
+}
+
 export default function Card({
   imagenCatalogo,
   nombre,
@@ -13,7 +32,7 @@ export default function Card({
   return (
     <div className={styles.contentCard} onClick={onClick}>
       <Image
-        src={imagenCatalogo || "/images/placeholder.jpg"}
+        src={normalizarImagen(imagenCatalogo)}
         alt={nombre}
         width={232}
         height={232}

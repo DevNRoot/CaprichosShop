@@ -9,6 +9,7 @@ export async function POST(req) {
     const body = await req.json();
     const { productos, total, id_cliente } = body;
 
+    // ===== VALIDACIONES =====
     if (!Array.isArray(productos) || productos.length === 0) {
       return NextResponse.json(
         { error: "Productos inválidos" },
@@ -41,35 +42,35 @@ export async function POST(req) {
       }
     }
 
-    await prisma.$transaction(async (tx) => {
-      // Crear pre venta
-      const preVenta = await tx.preVenta.create({
-        data: {
-          clienteId: Number(id_cliente),
-          total: Number(total),
-          estado: "0",
-          fecha: new Date(),
-        },
-      });
+    // 1️⃣ Crear pre-venta
+const preVenta = await prisma.preVenta.create({
+  data: {
+    clienteId: Number(id_cliente),
+    total: total, // string "630.00"
+    estado: 0,
+    fecha: new Date(),
+  },
+});
 
-      // Crear detalles
-      for (const producto of productos) {
-        await tx.detallePreVenta.create({
-          data: {
-            preVentaId: preVenta.id,
-            productoId: Number(producto.producto_id),
-            tallaId: Number(producto.talla_id),
-            colorId: Number(producto.color_id),
-            cantidad: Number(producto.cantidad),
-            precioUnitario: Number(producto.precio_unitario),
-            subTotal: Number(producto.sub_total),
-          },
-        });
-      }
-    });
+// 2️⃣ Crear detalles
+const operacionesDetalles = productos.map((producto) =>
+  prisma.detallePreVenta.create({
+    data: {
+      preVentaId: preVenta.id,
+      productoId: Number(producto.producto_id),
+      tallaId: Number(producto.talla_id),
+      colorId: Number(producto.color_id),
+      cantidad: Number(producto.cantidad),
+      precioUnitario: producto.precio_unitario,
+      subTotal: producto.sub_total,
+    },
+  })
+);
+
+await prisma.$transaction(operacionesDetalles);
 
     return NextResponse.json(
-      { message: "Pre venta guardada correctamente" },
+      { message: "✅ Pre venta guardada correctamente" },
       { status: 201 }
     );
   } catch (error) {

@@ -3,7 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  // provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -58,7 +59,7 @@ model Color {
 model Talla {
   id Int @id @default(autoincrement())
   nombre String
-  isActivo Boolean @map("isActivo")
+  isActivo Boolean @map("isactivo")
 
   variantes Variante[]
   detallePreVentas DetallePreVenta[]
@@ -179,7 +180,7 @@ model Compra {
 model Venta {
   id Int @id @default(autoincrement())
   fecha DateTime
-  total Float
+  total Decimal
   metodoDePago String @map("metodo_de_pago")
 
   clienteId Int @map("id_cliente")
@@ -192,8 +193,8 @@ model Venta {
 
 model PreVenta {
   id Int @id @default(autoincrement())
-  total Float
-  estado String
+  total Decimal
+  estado Int       
   fecha DateTime
 
   clienteId Int @map("id_cliente")
@@ -236,8 +237,9 @@ model DetalleCompra {
 model DetalleVenta {
   id Int @id @default(autoincrement())
   cantidad Int
-  precioUnitario Float @map("precio_unitario")
-  total Float
+
+  precioUnitario Decimal @map("precio_unitario")
+  total Decimal
 
   productoId Int @map("id_producto")
   ventaId Int @map("id_venta")
@@ -249,12 +251,12 @@ model DetalleVenta {
 
   @@map("detalle_venta")
 }
-
 model DetallePreVenta {
   id Int @id @default(autoincrement())
   cantidad Int
-  precioUnitario Float @map("precio_unitario")
-  subTotal Float @map("sub_total")
+
+  precioUnitario Decimal @map("precio_unitario")
+  subTotal Decimal @map("sub_total")
 
   preVentaId Int @map("pre_venta_id")
   productoId Int @map("producto_id")
@@ -290,7 +292,7 @@ model Usuario {
   nombre String @unique
   cargo  String
   clave  String
-  estado Int?   @default(1)
+  // estado Int?   @default(1)
 
-  @@map("usuarios")
+  @@map("usuario")
 }

@@ -12,41 +12,41 @@ export default function PreVenta() {
   const [clientes, setClientes] = useState([]);
   const [MPagosElegidos, setMPagosElegidos] = useState({});
 
-  // 🔒 BLOQUEO ANTIDOBLE EJECUCIÓN
+  // 🔒 BLOQUEO
   const [procesando, setProcesando] = useState(false);
 
   /* ================= FETCH ================= */
   useEffect(() => {
-    fetch("/api/clientes").then(r => r.json()).then(setClientes);
-    fetch("/api/productos").then(r => r.json()).then(setProductos);
-    fetch("/api/tallas").then(r => r.json()).then(setTallas);
-    fetch("/api/colores").then(r => r.json()).then(setColores);
+    fetch("/api/clientes").then((r) => r.json()).then(setClientes);
+    fetch("/api/productos").then((r) => r.json()).then(setProductos);
+    fetch("/api/tallas").then((r) => r.json()).then(setTallas);
+    fetch("/api/colores").then((r) => r.json()).then(setColores);
 
     fetch("/api/pre-ventas")
-      .then(r => r.json())
-      .then(data =>
+      .then((r) => r.json())
+      .then((data) =>
         setDatosPreVenta(
           data.sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
         )
       );
 
     fetch("/api/detalle-pre-ventas")
-      .then(r => r.json())
+      .then((r) => r.json())
       .then(setDatosDetallePreVenta);
   }, []);
 
   /* ================= HELPERS ================= */
-  const obtenerNombreProducto = id =>
-    productos.find(p => p.id === id)?.nombre || "";
+  const obtenerNombreProducto = (id) =>
+    productos.find((p) => p.id === id)?.nombre || "";
 
-  const obtenerNombreTalla = id =>
-    tallas.find(t => t.id === id)?.nombre || "";
+  const obtenerNombreTalla = (id) =>
+    tallas.find((t) => t.id === id)?.nombre || "";
 
-  const obtenerNombreColor = id =>
-    colores.find(c => c.id === id)?.nombre || "";
+  const obtenerNombreColor = (id) =>
+    colores.find((c) => c.id === id)?.nombre || "";
 
-  const showNameCliente = id =>
-    clientes.find(c => c.id === id)?.nombre || "";
+  const showNameCliente = (id) =>
+    clientes.find((c) => c.id === id)?.nombre || "";
 
   const formatearFecha = (fechaISO) =>
     new Date(fechaISO).toLocaleString("es-PE", {
@@ -60,44 +60,42 @@ export default function PreVenta() {
     });
 
   /* ================= MÉTODOS DE PAGO ================= */
-  const handlePagoChange = (fecha, metodo, checked) => {
-    setMPagosElegidos(prev => {
-      const copia = { ...(prev[fecha] || {}) };
+  const handlePagoChange = (key, metodo, checked) => {
+    setMPagosElegidos((prev) => {
+      const copia = { ...(prev[key] || {}) };
       checked ? (copia[metodo] = "") : delete copia[metodo];
-      return { ...prev, [fecha]: copia };
+      return { ...prev, [key]: copia };
     });
   };
 
-  const handleMontoChange = (fecha, metodo, monto) => {
-    setMPagosElegidos(prev => ({
+  const handleMontoChange = (key, metodo, monto) => {
+    setMPagosElegidos((prev) => ({
       ...prev,
-      [fecha]: {
-        ...(prev[fecha] || {}),
+      [key]: {
+        ...(prev[key] || {}),
         [metodo]: monto,
       },
     }));
   };
 
   /* ================= ELIMINAR PREVENTA ================= */
+  // ⚠️ ESTE BORRADO ES SOLO PARA EL BOTÓN 🗑
+  // Cuando confirmas ✔, ya NO se debe llamar a esta función.
   const eliminarRegistro = async (id) => {
     if (procesando) return;
     if (!confirm("¿Eliminar esta pre-venta?")) return;
 
     setProcesando(true);
     try {
-      const res = await fetch(`/api/pre-ventas/${id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(`/api/pre-ventas/${id}`, { method: "DELETE" });
 
       if (!res.ok) {
         alert("❌ No se pudo eliminar");
         return;
       }
 
-      setDatosPreVenta(prev => prev.filter(v => v.id !== id));
-      setDatosDetallePreVenta(prev =>
-        prev.filter(d => d.preVentaId !== id)
-      );
+      setDatosPreVenta((prev) => prev.filter((v) => v.id !== id));
+      setDatosDetallePreVenta((prev) => prev.filter((d) => d.preVentaId !== id));
     } finally {
       setProcesando(false);
     }
@@ -105,58 +103,77 @@ export default function PreVenta() {
 
   /* ================= GUARDAR VENTA ================= */
   const guardarVenta = async (venta) => {
-    if (procesando) return; // 🔒
+    if (procesando) return;
     setProcesando(true);
 
     try {
-      const pagos = MPagosElegidos[venta.fecha];
+      // ✅ usa un KEY estable por preventa (NO por fecha, porque puede repetirse)
+      const key = String(venta.id);
+      const pagos = MPagosElegidos[key];
 
       if (!pagos || Object.keys(pagos).length === 0) {
         alert("Selecciona método de pago");
         return;
       }
 
-      // ✅ VALIDACIÓN CORRECTA (ÚNICO CAMBIO)
       const sumaPagos = Object.values(pagos)
-        .map(Number)
+        .map((v) => Number(v) || 0)
         .reduce((a, b) => a + b, 0);
 
-      if (sumaPagos !== venta.total) {
-        alert(
-          `❌ El total es S/${venta.total} pero los pagos suman S/${sumaPagos}`
-        );
+      const totalVenta = Number(venta.total);
+      const totalPagos = Number(sumaPagos.toFixed(2));
+
+      if (totalPagos !== totalVenta) {
+        alert(`❌ El total es S/${totalVenta} pero los pagos suman S/${totalPagos}`);
         return;
       }
 
       const detalles = datosDetallePreVenta
-        .filter(d => d.preVentaId === venta.id)
-        .map(d => ({
+        .filter((d) => d.preVentaId === venta.id)
+        .map((d) => ({
           productoId: d.productoId,
           colorId: d.colorId,
           tallaId: d.tallaId,
-          cantidad: d.cantidad,
-          precioUnitario: d.precioUnitario,
-          subTotal: d.subTotal,
+          cantidad: Number(d.cantidad),
+          precioUnitario: Number(d.precioUnitario),
+          subTotal: Number(d.subTotal),
         }));
 
+      if (detalles.length === 0) {
+        alert("❌ Esta pre-venta no tiene detalles");
+        return;
+      }
+
+      // ✅ AHORA: enviamos preVentaId al backend para que él borre preventa y detalles en la misma transacción
       const res = await fetch("/api/ventas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          total: venta.total,
+          total: totalVenta,
           fecha: venta.fecha,
           metodo_de_pago: JSON.stringify(pagos),
           id_cliente: venta.clienteId,
           detalles,
+          preVentaId: venta.id, // 🔥 CLAVE
         }),
       });
 
+      const data = await res.json().catch(() => null);
+
       if (!res.ok) {
-        alert("❌ Error al registrar la venta");
+        alert(`❌ Error al registrar la venta: ${data?.detail || data?.details || ""}`);
         return;
       }
 
-      await eliminarRegistro(venta.id);
+      // ✅ actualizar UI: quitar la preventa de la tabla
+      setDatosPreVenta((prev) => prev.filter((v) => v.id !== venta.id));
+      setDatosDetallePreVenta((prev) => prev.filter((d) => d.preVentaId !== venta.id));
+      setMPagosElegidos((prev) => {
+        const copy = { ...prev };
+        delete copy[String(venta.id)];
+        return copy;
+      });
+
       alert("✅ Venta confirmada y stock actualizado");
     } catch (error) {
       console.error(error);
@@ -182,93 +199,96 @@ export default function PreVenta() {
         </thead>
 
         <tbody>
-          {datosPreVenta.map(venta => (
-            <tr key={venta.id}>
-              <td>{formatearFecha(venta.fecha)}</td>
-              <td>{showNameCliente(venta.clienteId)}</td>
-              <td>S/{venta.total}</td>
+          {datosPreVenta.map((venta) => {
+            const key = String(venta.id); // ✅ KEY estable
+            return (
+              <tr key={venta.id}>
+                <td>{formatearFecha(venta.fecha)}</td>
+                <td>{showNameCliente(venta.clienteId)}</td>
+                <td>S/{venta.total}</td>
 
-              <td>
-                <table className={Style.subTabla}>
-                  <thead>
-                    <tr>
-                      <th>Nombre</th>
-                      <th>Cantidad</th>
-                      <th>Talla</th>
-                      <th>Color</th>
-                      <th>Precio</th>
-                      <th>Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {datosDetallePreVenta
-                      .filter(d => d.preVentaId === venta.id)
-                      .map((d, i) => (
-                        <tr key={i}>
-                          <td>{obtenerNombreProducto(d.productoId)}</td>
-                          <td>{d.cantidad}</td>
-                          <td>{obtenerNombreTalla(d.tallaId)}</td>
-                          <td>{obtenerNombreColor(d.colorId)}</td>
-                          <td>S/{d.precioUnitario}</td>
-                          <td>S/{d.subTotal}</td>
-                        </tr>
+                <td>
+                  <table className={Style.subTabla}>
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th>Talla</th>
+                        <th>Color</th>
+                        <th>Precio</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {datosDetallePreVenta
+                        .filter((d) => d.preVentaId === venta.id)
+                        .map((d, i) => (
+                          <tr key={i}>
+                            <td>{obtenerNombreProducto(d.productoId)}</td>
+                            <td>{d.cantidad}</td>
+                            <td>{obtenerNombreTalla(d.tallaId)}</td>
+                            <td>{obtenerNombreColor(d.colorId)}</td>
+                            <td>S/{d.precioUnitario}</td>
+                            <td>S/{d.subTotal}</td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+
+                  <div className={Style.contentMetodoAddDelete}>
+                    <div className={Style.metodoPago}>
+                      <h3>Método de pago:</h3>
+
+                      {["Yape", "Tarjeta", "Efectivo"].map((metodo) => (
+                        <div key={metodo}>
+                          <label>
+                            <input
+                              type="checkbox"
+                              checked={MPagosElegidos[key]?.[metodo] !== undefined}
+                              onChange={(e) =>
+                                handlePagoChange(key, metodo, e.target.checked)
+                              }
+                            />
+                            {metodo}
+                          </label>
+
+                          {MPagosElegidos[key]?.[metodo] !== undefined && (
+                            <input
+                              type="number"
+                              min="0"
+                              step="0.01"
+                              value={MPagosElegidos[key][metodo]}
+                              onChange={(e) =>
+                                handleMontoChange(key, metodo, e.target.value)
+                              }
+                            />
+                          )}
+                        </div>
                       ))}
-                  </tbody>
-                </table>
+                    </div>
 
-                <div className={Style.contentMetodoAddDelete}>
-                  <div className={Style.metodoPago}>
-                    <h3>Método de pago:</h3>
-
-                    {["Yape", "Tarjeta", "Efectivo"].map(metodo => (
-                      <div key={metodo}>
-                        <label>
-                          <input
-                            type="checkbox"
-                            checked={
-                              MPagosElegidos[venta.fecha]?.[metodo] !== undefined
-                            }
-                            onChange={e =>
-                              handlePagoChange(
-                                venta.fecha,
-                                metodo,
-                                e.target.checked
-                              )
-                            }
-                          />
-                          {metodo}
-                        </label>
-
-                        {MPagosElegidos[venta.fecha]?.[metodo] !== undefined && (
-                          <input
-                            type="number"
-                            value={MPagosElegidos[venta.fecha][metodo]}
-                            onChange={e =>
-                              handleMontoChange(
-                                venta.fecha,
-                                metodo,
-                                e.target.value
-                              )
-                            }
-                          />
-                        )}
-                      </div>
-                    ))}
+                    <div className={Style.accionesPreVenta}>
+                      <button
+                        disabled={procesando}
+                        onClick={() => guardarVenta(venta)}
+                        title="Confirmar venta"
+                      >
+                        ✔
+                      </button>
+                      <button
+                        disabled={procesando}
+                        onClick={() => eliminarRegistro(venta.id)}
+                        title="Eliminar preventa"
+                      >
+                        🗑
+                      </button>
+                    </div>
                   </div>
-
-                  <div className={Style.accionesPreVenta}>
-                    <button disabled={procesando} onClick={() => guardarVenta(venta)}>
-                      ✔
-                    </button>
-                    <button disabled={procesando} onClick={() => eliminarRegistro(venta.id)}>
-                      🗑
-                    </button>
-                  </div>
-                </div>
-
-              </td>
-            </tr>
-          ))}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
