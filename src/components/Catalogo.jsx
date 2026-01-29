@@ -21,7 +21,11 @@ export default function Catalogo() {
 
   const productos = useProductosStore((s) => s.productos);
   const setProductos = useProductosStore((s) => s.setProductos);
+
   const textoBusqueda = useBusquedaStore((s) => s.textoBusqueda);
+  const textoBusquedaTemporal = useBusquedaStore(
+    (s) => s.textoBusquedaTemporal
+  );
 
   /* =============================
      CARGAR PRODUCTOS
@@ -39,12 +43,10 @@ export default function Catalogo() {
   const productosFiltrados = useMemo(() => {
     let lista = Array.isArray(productos) ? productos : [];
 
-    // 🔴 1. SOLO PRODUCTOS CON MARCA ACTIVA
     lista = lista.filter(
       (p) => p.marca && p.marca.estado === 1
     );
 
-    // 🔎 2. BUSCADOR
     if (textoBusqueda) {
       const t = textoBusqueda.toLowerCase();
       lista = lista.filter((p) =>
@@ -52,12 +54,10 @@ export default function Catalogo() {
       );
     }
 
-    // 👕 3. GÉNERO / CATEGORÍA
     lista = lista.filter(
       (p) => p.subCategoria?.categoria?.id === categoriaId
     );
 
-    // 📦 4. SUBCATEGORÍA
     if (subcategoriaId) {
       lista = lista.filter(
         (p) => p.subCategoriaId === Number(subcategoriaId)
@@ -70,14 +70,16 @@ export default function Catalogo() {
   return (
     <div className={Styles.divCatalogo}>
       {/* FILTRO MOBILE */}
-      <div className={Styles.filtroMobileWrapper}>
-        <button
-          className={Styles.btnFiltroMobile}
-          onClick={() => setOpenFiltro(true)}
-        >
-          🔍 Filtrar por
-        </button>
-      </div>
+      {!textoBusquedaTemporal && (
+        <div className={Styles.filtroMobileWrapper}>
+          <button
+            className={Styles.btnFiltroMobile}
+            onClick={() => setOpenFiltro(true)}
+          >
+            🔍 Filtrar por
+          </button>
+        </div>
+      )}
 
       {/* FILTRO DESKTOP */}
       <div className={Styles.containerFiltradoDesktop}>

@@ -12,7 +12,7 @@ import { useContextoStore } from "@/store/ContextoStore";
 import { useLoginStore } from "@/store/LoginStore";
 import { useMenuStore } from "@/store/MenuStore";
 import { useCarritoStore } from "@/store/CarritoStore";
-import { useUsuarioStore } from "@/store/UsuarioStore"; 
+import { useUsuarioStore } from "@/store/UsuarioStore";
 
 export default function Header() {
   const router = useRouter();
@@ -28,6 +28,13 @@ export default function Header() {
   // STORES
   // ===============================
   const setTextoBusqueda = useBusquedaStore((s) => s.setTextoBusqueda);
+  const textoBusquedaTemporal = useBusquedaStore(
+    (s) => s.textoBusquedaTemporal
+  );
+  const setTextoBusquedaTemporalStore = useBusquedaStore(
+    (s) => s.setTextoBusquedaTemporal
+  );
+
   const setProductosFiltrados = useContextoStore(
     (s) => s.setProductosFiltrados
   );
@@ -37,15 +44,14 @@ export default function Header() {
   const abrirCarrito = useCarritoStore((s) => s.abrirCarrito);
 
   // ===============================
-  // ESTADOS LOCALES
+  // ESTADOS LOCALES (NO TOCO)
   // ===============================
-  const [textoBusquedaTemporal, setTextoBusquedaTemporal] = useState("");
   const [mostrarMenuUsuario, setMostrarMenuUsuario] = useState(false);
   const [showAutoComplete, setShowAutoComplete] = useState(false);
   const [productos, setProductos] = useState([]);
 
   // ===============================
-  // CARGAR USUARIO DESDE LOCALSTORAGE
+  // CARGAR USUARIO
   // ===============================
   useEffect(() => {
     cargarUsuario();
@@ -73,7 +79,9 @@ export default function Header() {
   // ===============================
   const handleInputChange = (e) => {
     const valor = e.target.value;
-    setTextoBusquedaTemporal(valor);
+
+    // 👇 sincronizamos local + store
+    setTextoBusquedaTemporalStore(valor);
     setShowAutoComplete(true);
 
     const filtrados = productos.filter((p) =>
@@ -125,7 +133,6 @@ export default function Header() {
               setTextoBusqueda(textoBusquedaTemporal);
               setShowAutoComplete(false);
               router.push("/catalogo/caballero");
-              setTextoBusquedaTemporal("");
             }
             if (e.key === "Escape") setShowAutoComplete(false);
           }}
@@ -146,14 +153,13 @@ export default function Header() {
       {showAutoComplete && (
         <AutoCompletado
           setShowAutoComplete={setShowAutoComplete}
-          setTextoBusquedaTemporal={setTextoBusquedaTemporal}
+          setTextoBusquedaTemporal={setTextoBusquedaTemporalStore}
           setProductosFiltrados={setProductosFiltrados}
         />
       )}
 
       {/* OPCIONES DERECHA */}
       <div className={Style.contenedorHeaderOpciones}>
-        {/* 🛒 CARRITO */}
         <Image
           src="/images/lastCarritoCompras.png"
           className={Style.iconCarrito}
@@ -164,7 +170,6 @@ export default function Header() {
           style={{ cursor: "pointer" }}
         />
 
-        {/* USUARIO */}
         {usuario ? (
           <div className={Style.usuarioInfo}>
             <Image
