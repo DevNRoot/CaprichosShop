@@ -26,10 +26,10 @@ export default function Catalogo() {
   const textoBusquedaTemporal = useBusquedaStore(
     (s) => s.textoBusquedaTemporal
   );
+  const buscadorActivo = useBusquedaStore(
+    (s) => s.buscadorActivo
+  );
 
-  /* =============================
-     CARGAR PRODUCTOS
-  ============================= */
   useEffect(() => {
     fetch("/api/productos", { cache: "no-store" })
       .then((r) => r.json())
@@ -37,9 +37,6 @@ export default function Catalogo() {
       .catch(console.error);
   }, [setProductos]);
 
-  /* =============================
-     FILTRADO REAL
-  ============================= */
   const productosFiltrados = useMemo(() => {
     let lista = Array.isArray(productos) ? productos : [];
 
@@ -70,16 +67,18 @@ export default function Catalogo() {
   return (
     <div className={Styles.divCatalogo}>
       {/* FILTRO MOBILE */}
-      {!textoBusquedaTemporal && (
-        <div className={Styles.filtroMobileWrapper}>
-          <button
-            className={Styles.btnFiltroMobile}
-            onClick={() => setOpenFiltro(true)}
-          >
-            🔍 Filtrar por
-          </button>
-        </div>
-      )}
+      {!textoBusquedaTemporal &&
+        !textoBusqueda &&
+        !buscadorActivo && (
+          <div className={Styles.filtroMobileWrapper}>
+            <button
+              className={Styles.btnFiltroMobile}
+              onClick={() => setOpenFiltro(true)}
+            >
+              🔍 Filtrar por
+            </button>
+          </div>
+        )}
 
       {/* FILTRO DESKTOP */}
       <div className={Styles.containerFiltradoDesktop}>

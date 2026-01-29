@@ -18,7 +18,7 @@ export default function Header() {
   const router = useRouter();
 
   // ===============================
-  // USUARIO (ZUSTAND)
+  // USUARIO
   // ===============================
   const usuario = useUsuarioStore((s) => s.usuario);
   const cerrarSesion = useUsuarioStore((s) => s.cerrarSesion);
@@ -34,6 +34,9 @@ export default function Header() {
   const setTextoBusquedaTemporalStore = useBusquedaStore(
     (s) => s.setTextoBusquedaTemporal
   );
+  const setBuscadorActivo = useBusquedaStore(
+    (s) => s.setBuscadorActivo
+  );
 
   const setProductosFiltrados = useContextoStore(
     (s) => s.setProductosFiltrados
@@ -44,7 +47,7 @@ export default function Header() {
   const abrirCarrito = useCarritoStore((s) => s.abrirCarrito);
 
   // ===============================
-  // ESTADOS LOCALES (NO TOCO)
+  // ESTADOS LOCALES
   // ===============================
   const [mostrarMenuUsuario, setMostrarMenuUsuario] = useState(false);
   const [showAutoComplete, setShowAutoComplete] = useState(false);
@@ -64,7 +67,6 @@ export default function Header() {
     async function loadProductos() {
       try {
         const res = await fetch("/api/productos");
-        if (!res.ok) throw new Error("Backend no disponible");
         const data = await res.json();
         setProductos(data);
       } catch {
@@ -80,9 +82,13 @@ export default function Header() {
   const handleInputChange = (e) => {
     const valor = e.target.value;
 
-    // 👇 sincronizamos local + store
     setTextoBusquedaTemporalStore(valor);
     setShowAutoComplete(true);
+
+    // 🔑 si borra todo, cancela búsqueda activa
+    if (valor === "") {
+      setTextoBusqueda("");
+    }
 
     const filtrados = productos.filter((p) =>
       p.nombre.toLowerCase().includes(valor.toLowerCase())
@@ -127,14 +133,22 @@ export default function Header() {
           type="text"
           placeholder="¿Qué estás buscando?"
           value={textoBusquedaTemporal}
+          onFocus={() => setBuscadorActivo(true)}
+          onBlur={() => setBuscadorActivo(false)}
           onChange={handleInputChange}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               setTextoBusqueda(textoBusquedaTemporal);
               setShowAutoComplete(false);
+              setBuscadorActivo(false);
               router.push("/catalogo/caballero");
+              e.currentTarget.blur();
             }
-            if (e.key === "Escape") setShowAutoComplete(false);
+            if (e.key === "Escape") {
+              setShowAutoComplete(false);
+              setBuscadorActivo(false);
+              e.currentTarget.blur();
+            }
           }}
         />
 
