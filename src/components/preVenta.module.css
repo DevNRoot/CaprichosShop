@@ -22,7 +22,7 @@
   font-weight: bold;
 }
 
-/* Tabla General */
+
 .tablaGeneral {
   width: 100%;
   border-collapse: collapse;
@@ -35,13 +35,14 @@
   border: 1px solid black;
   padding: 10px;
   text-align: left;
+  width: 10%;
 }
 
 .tablaGeneral th {
   background-color: #ddd;
 }
 
-/* Subtabla */
+
 .subTabla {
   width: 100%;
   border-collapse: collapse;
@@ -59,7 +60,7 @@
   background-color: #eee;
 }
 
-/* ✅ CHECKBOX CORREGIDO */
+
 .metodoPago input[type="checkbox"] {
   margin-right: 5px;
 }
@@ -84,6 +85,7 @@
   display: flex;
   flex-direction: row;
   justify-content: end;
+  gap: 10px; 
 }
 
 .metodoPago {
@@ -113,4 +115,65 @@
 
 .encabezadoTabla {
   background-color: yellow;
+}
+
+
+@media (max-width: 768px) {
+  .contentPreVenta {
+    width: 100%;
+    margin: 20px 0;
+    padding: 10px;
+    overflow-x: hidden; 
+  }
+
+  .ventaCard {
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .ventaCard h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .ventaCard .detalle {
+    margin-bottom: 8px;
+  }
+
+  .ventaCard .detalle label {
+    font-weight: bold;
+  }
+
+  .ventaCard .detalle span {
+    margin-left: 5px;
+  }
+
+  .accionesPreVenta {
+    display: flex;
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  
+  .tablaGeneral {
+    display: none;
+  }
+
+  
+  .ventaCard {
+    display: block;
+  }
+
+ 
+  .metodoPago input[type="number"] {
+    width: 100px; 
+    padding: 5px;
+    font-size: 14px; 
+  }
 }

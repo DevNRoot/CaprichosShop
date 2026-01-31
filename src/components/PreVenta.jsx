@@ -10,12 +10,10 @@ export default function PreVenta() {
   const [tallas, setTallas] = useState([]);
   const [colores, setColores] = useState([]);
   const [clientes, setClientes] = useState([]);
-  const [MPagosElegidos, setMPagosElegidos] = useState({});
-
-  // 🔒 BLOQUEO
+  const [MPagosElegidos, setMPagosElegidos] = useState([]);
   const [procesando, setProcesando] = useState(false);
 
-  /* ================= FETCH ================= */
+  // Fetch data from the API
   useEffect(() => {
     fetch("/api/clientes").then((r) => r.json()).then(setClientes);
     fetch("/api/productos").then((r) => r.json()).then(setProductos);
@@ -59,7 +57,6 @@ export default function PreVenta() {
       hour12: false,
     });
 
-  /* ================= MÉTODOS DE PAGO ================= */
   const handlePagoChange = (key, metodo, checked) => {
     setMPagosElegidos((prev) => {
       const copia = { ...(prev[key] || {}) };
@@ -78,9 +75,6 @@ export default function PreVenta() {
     }));
   };
 
-  /* ================= ELIMINAR PREVENTA ================= */
-  // ⚠️ ESTE BORRADO ES SOLO PARA EL BOTÓN 🗑
-  // Cuando confirmas ✔, ya NO se debe llamar a esta función.
   const eliminarRegistro = async (id) => {
     if (procesando) return;
     if (!confirm("¿Eliminar esta pre-venta?")) return;
@@ -101,13 +95,11 @@ export default function PreVenta() {
     }
   };
 
-  /* ================= GUARDAR VENTA ================= */
   const guardarVenta = async (venta) => {
     if (procesando) return;
     setProcesando(true);
 
     try {
-      // ✅ usa un KEY estable por preventa (NO por fecha, porque puede repetirse)
       const key = String(venta.id);
       const pagos = MPagosElegidos[key];
 
@@ -144,7 +136,6 @@ export default function PreVenta() {
         return;
       }
 
-      // ✅ AHORA: enviamos preVentaId al backend para que él borre preventa y detalles en la misma transacción
       const res = await fetch("/api/ventas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -154,7 +145,7 @@ export default function PreVenta() {
           metodo_de_pago: JSON.stringify(pagos),
           id_cliente: venta.clienteId,
           detalles,
-          preVentaId: venta.id, // 🔥 CLAVE
+          preVentaId: venta.id,
         }),
       });
 
@@ -165,7 +156,6 @@ export default function PreVenta() {
         return;
       }
 
-      // ✅ actualizar UI: quitar la preventa de la tabla
       setDatosPreVenta((prev) => prev.filter((v) => v.id !== venta.id));
       setDatosDetallePreVenta((prev) => prev.filter((d) => d.preVentaId !== venta.id));
       setMPagosElegidos((prev) => {
@@ -183,114 +173,183 @@ export default function PreVenta() {
     }
   };
 
-  /* ================= RENDER ================= */
   return (
     <div className={Style.contentPreVenta}>
       <h1 className={Style.tituloPreVentas}>Pre Ventas</h1>
 
-      <table className={Style.tablaGeneral}>
-        <thead>
-          <tr>
-            <th>Fecha</th>
-            <th>Cliente</th>
-            <th>Total</th>
-            <th>Productos</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {datosPreVenta.map((venta) => {
-            const key = String(venta.id); // ✅ KEY estable
-            return (
-              <tr key={venta.id}>
-                <td>{formatearFecha(venta.fecha)}</td>
-                <td>{showNameCliente(venta.clienteId)}</td>
-                <td>S/{venta.total}</td>
-
-                <td>
-                  <table className={Style.subTabla}>
-                    <thead>
-                      <tr>
-                        <th>Nombre</th>
-                        <th>Cantidad</th>
-                        <th>Talla</th>
-                        <th>Color</th>
-                        <th>Precio</th>
-                        <th>Total</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      {datosDetallePreVenta
-                        .filter((d) => d.preVentaId === venta.id)
-                        .map((d, i) => (
-                          <tr key={i}>
-                            <td>{obtenerNombreProducto(d.productoId)}</td>
-                            <td>{d.cantidad}</td>
-                            <td>{obtenerNombreTalla(d.tallaId)}</td>
-                            <td>{obtenerNombreColor(d.colorId)}</td>
-                            <td>S/{d.precioUnitario}</td>
-                            <td>S/{d.subTotal}</td>
-                          </tr>
-                        ))}
-                    </tbody>
-                  </table>
-
-                  <div className={Style.contentMetodoAddDelete}>
-                    <div className={Style.metodoPago}>
-                      <h3>Método de pago:</h3>
-
-                      {["Yape", "Tarjeta", "Efectivo"].map((metodo) => (
-                        <div key={metodo}>
-                          <label>
-                            <input
-                              type="checkbox"
-                              checked={MPagosElegidos[key]?.[metodo] !== undefined}
-                              onChange={(e) =>
-                                handlePagoChange(key, metodo, e.target.checked)
-                              }
-                            />
-                            {metodo}
-                          </label>
-
-                          {MPagosElegidos[key]?.[metodo] !== undefined && (
-                            <input
-                              type="number"
-                              min="0"
-                              step="0.01"
-                              value={MPagosElegidos[key][metodo]}
-                              onChange={(e) =>
-                                handleMontoChange(key, metodo, e.target.value)
-                              }
-                            />
-                          )}
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className={Style.accionesPreVenta}>
-                      <button
-                        disabled={procesando}
-                        onClick={() => guardarVenta(venta)}
-                        title="Confirmar venta"
-                      >
-                        ✔
-                      </button>
-                      <button
-                        disabled={procesando}
-                        onClick={() => eliminarRegistro(venta.id)}
-                        title="Eliminar preventa"
-                      >
-                        🗑
-                      </button>
-                    </div>
-                  </div>
-                </td>
+      {/* Mostrar la tabla solo en pantallas grandes */}
+      <div className={Style.tablaGeneralContainer}>
+        {window.innerWidth > 768 && (
+          <table className={Style.tablaGeneral}>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Cliente</th>
+                <th>Total</th>
+                <th>Productos</th>
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            </thead>
+
+            <tbody>
+              {datosPreVenta.map((venta) => {
+                const key = String(venta.id);
+                return (
+                  <tr key={venta.id}>
+                    <td>{formatearFecha(venta.fecha)}</td>
+                    <td>{showNameCliente(venta.clienteId)}</td>
+                    <td>S/{venta.total}</td>
+
+                    <td>
+                      <table className={Style.subTabla}>
+                        <thead>
+                          <tr>
+                            <th>Nombre</th>
+                            <th>Cantidad</th>
+                            <th>Talla</th>
+                            <th>Color</th>
+                            <th>Precio</th>
+                            <th>Total</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          {datosDetallePreVenta
+                            .filter((d) => d.preVentaId === venta.id)
+                            .map((d, i) => (
+                              <tr key={i}>
+                                <td>{obtenerNombreProducto(d.productoId)}</td>
+                                <td>{d.cantidad}</td>
+                                <td>{obtenerNombreTalla(d.tallaId)}</td>
+                                <td>{obtenerNombreColor(d.colorId)}</td>
+                                <td>S/{d.precioUnitario}</td>
+                                <td>S/{d.subTotal}</td>
+                              </tr>
+                            ))}
+                        </tbody>
+                      </table>
+
+                      <div className={Style.contentMetodoAddDelete}>
+                        <div className={Style.metodoPago}>
+                          <h3>Método de pago:</h3>
+
+                          {["Yape", "Tarjeta", "Efectivo"].map((metodo) => (
+                            <div key={metodo}>
+                              <label>
+                                <input
+                                  type="checkbox"
+                                  checked={MPagosElegidos[key]?.[metodo] !== undefined}
+                                  onChange={(e) =>
+                                    handlePagoChange(key, metodo, e.target.checked)
+                                  }
+                                />
+                                {metodo}
+                              </label>
+
+                              {MPagosElegidos[key]?.[metodo] !== undefined && (
+                                <input
+                                  type="number"
+                                  min="0"
+                                  step="0.01"
+                                  value={MPagosElegidos[key][metodo]}
+                                  onChange={(e) =>
+                                    handleMontoChange(key, metodo, e.target.value)
+                                  }
+                                />
+                              )}
+                            </div>
+                          ))}
+                        </div>
+
+                        <div className={Style.accionesPreVenta}>
+                          <button
+                            disabled={procesando}
+                            onClick={() => guardarVenta(venta)}
+                            title="Confirmar venta"
+                          >
+                            ✔
+                          </button>
+                          <button
+                            disabled={procesando}
+                            onClick={() => eliminarRegistro(venta.id)}
+                            title="Eliminar preventa"
+                          >
+                            🗑
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
+
+        {/* Mostrar tarjetas solo en pantallas pequeñas */}
+        {window.innerWidth <= 768 && (
+          <div className={Style.ventaCardContainer}>
+            {datosPreVenta.map((venta) => (
+              <div key={venta.id} className={Style.ventaCard}>
+                <h3>Fecha: {formatearFecha(venta.fecha)}</h3>
+                <div className={Style.detalle}>
+                  <label>Cliente:</label>
+                  <span>{showNameCliente(venta.clienteId)}</span>
+                </div>
+                <div className={Style.detalle}>
+                  <label>Total:</label>
+                  <span>S/{venta.total}</span>
+                </div>
+
+                <div className={Style.detalle}>
+                  <h4>Productos:</h4>
+                  {datosDetallePreVenta
+                    .filter((d) => d.preVentaId === venta.id)
+                    .map((d, i) => (
+                      <div key={i} className={Style.detalle}>
+                        <span>{obtenerNombreProducto(d.productoId)} - Cantidad: {d.cantidad} - Talla: {obtenerNombreTalla(d.tallaId)} - Color: {obtenerNombreColor(d.colorId)} - Precio: S/{d.precioUnitario}</span>
+                      </div>
+                    ))}
+                </div>
+
+                <div className={Style.metodoPago}>
+                  <h4>Método de pago:</h4>
+                  {["Yape", "Tarjeta", "Efectivo"].map((metodo) => (
+                    <div key={metodo}>
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={MPagosElegidos[String(venta.id)]?.[metodo] !== undefined}
+                          onChange={(e) => handlePagoChange(String(venta.id), metodo, e.target.checked)}
+                        />
+                        {metodo}
+                      </label>
+
+                      {MPagosElegidos[String(venta.id)]?.[metodo] !== undefined && (
+                        <input
+                          type="number"
+                          min="0"
+                          step="0.01"
+                          value={MPagosElegidos[String(venta.id)][metodo]}
+                          onChange={(e) => handleMontoChange(String(venta.id), metodo, e.target.value)}
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                <div className={Style.accionesPreVenta}>
+                  <button disabled={procesando} onClick={() => guardarVenta(venta)} title="Confirmar venta">
+                    ✔
+                  </button>
+                  <button disabled={procesando} onClick={() => eliminarRegistro(venta.id)} title="Eliminar preventa">
+                    🗑
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
