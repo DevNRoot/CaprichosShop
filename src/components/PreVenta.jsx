@@ -362,53 +362,66 @@ import Style from "./preVenta.module.css";
 
 // Función para obtener los datos en cada solicitud (SSR)
 export async function getServerSideProps() {
-  // Realiza las peticiones API en el servidor
-  const resPreVenta = await fetch("https://your-backend-api-url/api/pre-ventas");
-  const datosPreVenta = await resPreVenta.json();
+  try {
+    const resPreVenta = await fetch("https://your-backend-api-url/api/pre-ventas");
+    const datosPreVenta = await resPreVenta.json();
 
-  const resDetallePreVenta = await fetch("https://your-backend-api-url/api/detalle-pre-ventas");
-  const datosDetallePreVenta = await resDetallePreVenta.json();
+    const resDetallePreVenta = await fetch("https://your-backend-api-url/api/detalle-pre-ventas");
+    const datosDetallePreVenta = await resDetallePreVenta.json();
 
-  const resClientes = await fetch("https://your-backend-api-url/api/clientes");
-  const clientes = await resClientes.json();
+    const resClientes = await fetch("https://your-backend-api-url/api/clientes");
+    const clientes = await resClientes.json();
 
-  const resProductos = await fetch("https://your-backend-api-url/api/productos");
-  const productos = await resProductos.json();
+    const resProductos = await fetch("https://your-backend-api-url/api/productos");
+    const productos = await resProductos.json();
 
-  const resTallas = await fetch("https://your-backend-api-url/api/tallas");
-  const tallas = await resTallas.json();
+    const resTallas = await fetch("https://your-backend-api-url/api/tallas");
+    const tallas = await resTallas.json();
 
-  const resColores = await fetch("https://your-backend-api-url/api/colores");
-  const colores = await resColores.json();
+    const resColores = await fetch("https://your-backend-api-url/api/colores");
+    const colores = await resColores.json();
 
-  return {
-    props: {
-      datosPreVenta,
-      datosDetallePreVenta,
-      clientes,
-      productos,
-      tallas,
-      colores,
-    },
-  };
+    return {
+      props: {
+        datosPreVenta,
+        datosDetallePreVenta,
+        clientes,
+        productos,
+        tallas,
+        colores,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        datosPreVenta: [],
+        datosDetallePreVenta: [],
+        clientes: [],
+        productos: [],
+        tallas: [],
+        colores: [],
+      },
+    };
+  }
 }
 
 export default function PreVenta({
-  datosPreVenta,
-  datosDetallePreVenta,
-  clientes,
-  productos,
-  tallas,
-  colores,
+  datosPreVenta = [],
+  datosDetallePreVenta = [],
+  clientes = [],
+  productos = [],
+  tallas = [],
+  colores = [],
 }) {
   const [MPagosElegidos, setMPagosElegidos] = useState([]);
   const [procesando, setProcesando] = useState(false);
 
   // Helper Functions
-  const obtenerNombreProducto = (id) => productos.find((p) => p.id === id)?.nombre || "";
-  const obtenerNombreTalla = (id) => tallas.find((t) => t.id === id)?.nombre || "";
-  const obtenerNombreColor = (id) => colores.find((c) => c.id === id)?.nombre || "";
-  const showNameCliente = (id) => clientes.find((c) => c.id === id)?.nombre || "";
+  const obtenerNombreProducto = (id) => productos.find((p) => p.id === id)?.nombre || "Desconocido";
+  const obtenerNombreTalla = (id) => tallas.find((t) => t.id === id)?.nombre || "Desconocido";
+  const obtenerNombreColor = (id) => colores.find((c) => c.id === id)?.nombre || "Desconocido";
+  const showNameCliente = (id) => clientes.find((c) => c.id === id)?.nombre || "Desconocido";
 
   const formatearFecha = (fechaISO) =>
     new Date(fechaISO).toLocaleString("es-PE", {
@@ -578,18 +591,16 @@ export default function PreVenta({
                       </thead>
 
                       <tbody>
-                        {datosDetallePreVenta
-                          .filter((d) => d.preVentaId === venta.id)
-                          .map((d, i) => (
-                            <tr key={i}>
-                              <td>{obtenerNombreProducto(d.productoId)}</td>
-                              <td>{d.cantidad}</td>
-                              <td>{obtenerNombreTalla(d.tallaId)}</td>
-                              <td>{obtenerNombreColor(d.colorId)}</td>
-                              <td>S/{d.precioUnitario}</td>
-                              <td>S/{d.subTotal}</td>
-                            </tr>
-                          ))}
+                        {datosDetallePreVenta?.filter((d) => d.preVentaId === venta.id)?.map((d, i) => (
+                          <tr key={i}>
+                            <td>{obtenerNombreProducto(d.productoId)}</td>
+                            <td>{d.cantidad}</td>
+                            <td>{obtenerNombreTalla(d.tallaId)}</td>
+                            <td>{obtenerNombreColor(d.colorId)}</td>
+                            <td>S/{d.precioUnitario}</td>
+                            <td>S/{d.subTotal}</td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
 
