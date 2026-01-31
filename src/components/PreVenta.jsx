@@ -369,7 +369,6 @@ export default function PreVenta() {
   const [MPagosElegidos, setMPagosElegidos] = useState([]);
   const [procesando, setProcesando] = useState(false);
   
-  // Nuevo estado para saber si estamos en cliente (navegador)
   const [isClient, setIsClient] = useState(false);
 
   // Fetch data from the API
