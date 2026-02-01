@@ -1,11 +1,8 @@
 .contentPreVenta {
-  /* border: 2px solid black; */
-  width: 1400px;
-  height: auto;
-  margin-top: 100px;
-  margin-left: 50px;
-  padding: 20px;
-  background-color: #f9f9f9;
+  max-width: 1400px;
+  width: 100%;
+  margin: 100px auto 0 auto;
+  padding: 16px;
 }
 
 .btnNotaDeVenta {
@@ -117,4 +114,119 @@
 
 .subTabla th {
   background-color: #eee;
+}
+
+.productoDesktop {
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.productoDesktopNombre {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.productoDesktopGrid {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 6px 14px;
+  font-size: 13px;
+}
+
+
+/* ===== MOBILE ===== */
+.ventasMobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .tablaGeneral {
+    display: none;
+  }
+
+  .ventasMobile {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .ventaCard {
+    background: #fff;
+    border-radius: 10px;
+    padding: 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  }
+
+  .ventaHeader {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  .ventaRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .productosVenta {
+    margin-top: 8px;
+    border-top: 1px solid #eee;
+    padding-top: 8px;
+  }
+
+  .productoItem {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .btnNotaDeVenta {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+  }
+
+  .filtrosFechas {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .filtroMetodosDePago {
+    font-size: 14px;
+    gap: 6px;
+  }
+
+  @media (max-width: 768px) {
+  .productoCard {
+    margin-top: 8px;
+    padding: 10px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+  }
+
+  .productoNombre {
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+
+  .productoFila {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 3px;
+  }
+
+  .productoFilaTotal {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid #ddd;
+    font-size: 15px;
+  }
+}
+
 }

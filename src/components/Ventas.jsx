@@ -24,21 +24,16 @@ export default function Ventas({
   const [gananciaLiquida, setGananciaLiquida] = useState(0);
   const [ventaSeleccionada, setVentaSeleccionada] = useState(null);
 
-  // ===============================
-  // FECHAS INICIALES (PERÚ UTC-5)
-  // ===============================
+  /* ===== FECHA PERÚ ===== */
   useEffect(() => {
     const hoy = new Date().toLocaleDateString("en-CA", {
       timeZone: "America/Lima",
     });
-
     setFechaInicio(hoy);
     setFechaFin(hoy);
   }, []);
 
-  // ===============================
-  // HELPERS
-  // ===============================
+  /* ===== HELPERS ===== */
   const obtenerNombreProducto = id =>
     productos.find(p => p.id === id)?.nombre || "";
 
@@ -61,9 +56,7 @@ export default function Ventas({
     return colores.find(c => c.id === variante?.colorId)?.nombre || "-";
   };
 
-  // ===============================
-  // FILTRADO DE VENTAS
-  // ===============================
+  /* ===== FILTRADO ===== */
   const ventasFiltradas = useMemo(() => {
     return datosVenta
       .filter(v => {
@@ -80,77 +73,53 @@ export default function Ventas({
       .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
   }, [datosVenta, fechaInicio, fechaFin, metodoSeleccionado]);
 
-  // ===============================
-  // MONTO DEL DÍA
-  // ===============================
+  /* ===== MONTO DEL DÍA ===== */
   useEffect(() => {
     let total = 0;
-
     ventasFiltradas.forEach(v => {
       try {
         const metodos = JSON.parse(v.metodoDePago);
         if (metodoSeleccionado) {
           total += Number(metodos[metodoSeleccionado] || 0);
         } else {
-          Object.values(metodos).forEach(m => {
-            total += Number(m);
-          });
+          Object.values(metodos).forEach(m => (total += Number(m)));
         }
       } catch {}
     });
-
     setMontoDelDia(total);
   }, [ventasFiltradas, metodoSeleccionado]);
 
-  // ===============================
-  // GANANCIA LÍQUIDA
-  // ===============================
+  /* ===== GANANCIA ===== */
   useEffect(() => {
-    let totalGanancia = 0;
-
+    let total = 0;
     ventasFiltradas.forEach(venta => {
-      const detalles = datosDetalleVenta.filter(
-        d => d.ventaId === venta.id
-      );
-
-      detalles.forEach(d => {
-        const compra = obtenerPrecioCompra(d.productoId);
-        totalGanancia += (d.precioUnitario - compra) * d.cantidad;
-      });
+      datosDetalleVenta
+        .filter(d => d.ventaId === venta.id)
+        .forEach(d => {
+          const compra = obtenerPrecioCompra(d.productoId);
+          total += (d.precioUnitario - compra) * d.cantidad;
+        });
     });
-
-    setGananciaLiquida(totalGanancia);
+    setGananciaLiquida(total);
   }, [ventasFiltradas, datosDetalleVenta, productos]);
 
-  // ===============================
-  // RENDER
-  // ===============================
   return (
     <div className={Style.contentPreVenta}>
       <h1 className={Style.tituloPreVentas}>Ventas</h1>
 
-      {/* FILTROS FECHA */}
+      {/* ===== FILTROS FECHA ===== */}
       <div className={Style.filtrosFechas}>
         <label>
           Desde:
-          <input
-            type="date"
-            value={fechaInicio}
-            onChange={e => setFechaInicio(e.target.value)}
-          />
+          <input type="date" value={fechaInicio} onChange={e => setFechaInicio(e.target.value)} />
         </label>
-
         <label>
           Hasta:
-          <input
-            type="date"
-            value={fechaFin}
-            onChange={e => setFechaFin(e.target.value)}
-          />
+          <input type="date" value={fechaFin} onChange={e => setFechaFin(e.target.value)} />
         </label>
       </div>
 
-      {/* MÉTODOS DE PAGO */}
+      {/* ===== MÉTODOS DE PAGO ===== */}
       <div className={Style.filtroMetodosDePago}>
         {["Yape", "Tarjeta", "Efectivo"].map(m => (
           <label key={m}>
@@ -180,7 +149,7 @@ export default function Ventas({
         <span>GANANCIA LÍQUIDA: S/ {gananciaLiquida.toFixed(2)}</span>
       </div>
 
-      {/* GRÁFICOS */}
+      {/* ===== GRÁFICOS ===== */}
       <GraficoTopProductos
         ventasFiltradas={ventasFiltradas}
         datosDetalleVenta={datosDetalleVenta}
@@ -195,7 +164,7 @@ export default function Ventas({
         ventasFiltradas={ventasFiltradas}
       />
 
-      {/* TABLA */}
+      {/* ===== TABLA DESKTOP ===== */}
       <table className={Style.tablaGeneral}>
         <thead>
           <tr>
@@ -209,45 +178,34 @@ export default function Ventas({
         </thead>
 
         <tbody>
-          {ventasFiltradas.map(venta => (
-            <tr key={venta.id}>
-              <td>{venta.fecha}</td>
-              <td>{showNameCliente(venta.clienteId)}</td>
-              <td>S/{venta.total}</td>
-              <td>{venta.metodoDePago}</td>
+          {ventasFiltradas.map(v => (
+            <tr key={v.id}>
+              <td>{v.fecha}</td>
+              <td>{showNameCliente(v.clienteId)}</td>
+              <td>S/{v.total}</td>
+              <td>{v.metodoDePago}</td>
+              <td>
+  {datosDetalleVenta
+    .filter(d => d.ventaId === v.id)
+    .map((d, i) => (
+      <div key={i} className={Style.productoDesktop}>
+        <div className={Style.productoDesktopNombre}>
+          {obtenerNombreProducto(d.productoId)}
+        </div>
+
+        <div className={Style.productoDesktopGrid}>
+          <span><b>Cant:</b> {d.cantidad}</span>
+          <span><b>Talla:</b> {obtenerNombreTallaPorVariante(d.varianteId)}</span>
+          <span><b>Color:</b> {obtenerNombreColorPorVariante(d.varianteId)}</span>
+          <span><b>Precio:</b> S/{d.precioUnitario}</span>
+          <span><b>Total:</b> S/{d.total}</span>
+        </div>
+      </div>
+    ))}
+</td>
 
               <td>
-                <table className={Style.subTabla}>
-                  <thead>
-                    <tr>
-                      <th>Producto</th>
-                      <th>Cantidad</th>
-                      <th>Talla</th>
-                      <th>Color</th>
-                      <th>Precio</th>
-                      <th>Total</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {datosDetalleVenta
-                      .filter(d => d.ventaId === venta.id)
-                      .map((d, i) => (
-                        <tr key={i}>
-                          <td>{obtenerNombreProducto(d.productoId)}</td>
-                          <td>{d.cantidad}</td>
-                          <td>{obtenerNombreTallaPorVariante(d.varianteId)}</td>
-                          <td>{obtenerNombreColorPorVariante(d.varianteId)}</td>
-                          <td>S/{d.precioUnitario}</td>
-                          <td>S/{d.total}</td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </table>
-              </td>
-
-              <td>
-                <button onClick={() => setVentaSeleccionada(venta)}>
+                <button onClick={() => setVentaSeleccionada(v)}>
                   Generar
                 </button>
               </td>
@@ -255,6 +213,66 @@ export default function Ventas({
           ))}
         </tbody>
       </table>
+
+      {/* ===== MOBILE CARDS ===== */}
+      <div className={Style.ventasMobile}>
+        {ventasFiltradas.map(v => (
+          <div key={v.id} className={Style.ventaCard}>
+            <div className={Style.ventaHeader}>
+              {new Date(v.fecha).toLocaleString()}
+            </div>
+
+            <div className={Style.ventaRow}><span>Cliente</span><span>{showNameCliente(v.clienteId)}</span></div>
+            <div className={Style.ventaRow}><span>Total</span><strong>S/{v.total}</strong></div>
+            <div className={Style.ventaRow}><span>Método</span><span>{v.metodoDePago}</span></div>
+
+            {/* 🔥 PRODUCTOS MOBILE DETALLADOS */}
+            <div className={Style.productosVenta}>
+              {datosDetalleVenta
+                .filter(d => d.ventaId === v.id)
+                .map((d, i) => (
+                  <div key={i} className={Style.productoCard}>
+                    <div className={Style.productoNombre}>
+                      {obtenerNombreProducto(d.productoId)}
+                    </div>
+
+                    <div className={Style.productoFila}>
+                      <span>Cantidad</span>
+                      <span>{d.cantidad}</span>
+                    </div>
+
+                    <div className={Style.productoFila}>
+                      <span>Talla</span>
+                      <span>{obtenerNombreTallaPorVariante(d.varianteId)}</span>
+                    </div>
+
+                    <div className={Style.productoFila}>
+                      <span>Color</span>
+                      <span>{obtenerNombreColorPorVariante(d.varianteId)}</span>
+                    </div>
+
+                    <div className={Style.productoFila}>
+                      <span>Precio</span>
+                      <span>S/{d.precioUnitario}</span>
+                    </div>
+
+                    <div className={Style.productoFilaTotal}>
+                      <span>Total</span>
+                      <strong>S/{d.total}</strong>
+                    </div>
+                  </div>
+                ))}
+            </div>
+
+            <button
+              className={Style.btnNotaDeVenta}
+              onClick={() => setVentaSeleccionada(v)}
+            >
+              Generar Nota
+            </button>
+          </div>
+        ))}
+      </div>
 
       {ventaSeleccionada && (
         <NotaVentaPrint
