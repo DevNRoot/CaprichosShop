@@ -9,8 +9,6 @@ export default function FormCategorias() {
   const [categorias, setCategorias] = useState([]);
   const router = useRouter();
 
-  // NAVEGACIÓN
-
   const irAMantCategorias = () => {
     router.push("/MantCategorias");
   };
@@ -18,8 +16,6 @@ export default function FormCategorias() {
   const irCategoriasEdit = (id) => {
     router.push(`/MantCategorias/${id}`);
   };
-
-  // FETCH CATEGORÍAS
   
   useEffect(() => {
     fetch(`/api/categorias`)

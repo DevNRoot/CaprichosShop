@@ -13,8 +13,6 @@ export default function FormExistencias() {
 
   const [findExistencia, setFindExistencia] = useState("");
 
-  // NAVEGACIÓN
-
   const irMantExistencia = () => {
     router.push("/MantExistencia");
   };
@@ -22,8 +20,6 @@ export default function FormExistencias() {
   const irMantExistenciaEdit = (id) => {
     router.push(`/MantExistencia/${id}`);
   };
-
-  // CARGAR EXISTENCIAS
 
   useEffect(() => {
     fetch("/api/variantes")
@@ -33,8 +29,6 @@ export default function FormExistencias() {
         console.error("Error al obtener existencias:", error)
       );
   }, [setExistencias]);
-
-  // FILTRAR EXISTENCIAS
   
   const existenciasFiltradas = findExistencia.trim()
     ? existencias.filter((existencia) =>
@@ -44,8 +38,6 @@ export default function FormExistencias() {
       )
     : existencias;
 
-  // ELIMINAR EXISTENCIA
-  
   const eliminarProducto = (id) => {
     if (!window.confirm("¿Estás seguro de eliminar esta variante?")) return;
 
@@ -60,9 +52,6 @@ export default function FormExistencias() {
       );
   };
 
-  // ===============================
-  // RENDER
-  // ===============================
   return (
     <div className={Style.contentExistencias}>
       <div className={Style.contentAddFind}>

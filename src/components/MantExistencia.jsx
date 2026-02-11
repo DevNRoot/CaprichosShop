@@ -6,8 +6,6 @@ import Style from "./mantExistencia.module.css";
 
 export default function MantExistencia() {
   const router = useRouter();
-
-  // ESTADOS
   
   const [categorias, setCategorias] = useState([]);
   const [subCategorias, setSubCategorias] = useState([]);
@@ -24,8 +22,6 @@ export default function MantExistencia() {
   const [idColor, setIdColor] = useState("");
   const [idTalla, setIdTalla] = useState("");
   const [cantidad, setCantidad] = useState("");
-
-  // CARGA INICIAL
   
   useEffect(() => {
     Promise.all([
@@ -42,8 +38,6 @@ export default function MantExistencia() {
       setTallas(tal);
     });
   }, []);
-
-  // FILTROS
   
   const cambioCategoria = (e) => {
     const id = Number(e.target.value);
@@ -66,8 +60,6 @@ export default function MantExistencia() {
       productos.filter(p => p.subCategoriaId === id)
     );
   };
-
-  // GUARDAR EXISTENCIA 
 
   const submitExistencia = async (e) => {
     e.preventDefault();
@@ -98,8 +90,6 @@ export default function MantExistencia() {
       alert("Error interno al guardar existencia");
     }
   };
-
-  // RENDER
 
   return (
     <div className={Style.mantExistencia}>

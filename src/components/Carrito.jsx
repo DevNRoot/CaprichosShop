@@ -37,7 +37,6 @@ export default function Carrito() {
     0
   );
 
-  /* ===== CARGAR CLIENTES ===== */
   useEffect(() => {
     fetch("/api/clientes")
       .then((res) => res.json())
@@ -59,7 +58,6 @@ export default function Carrito() {
     });
   };
 
-  /* ===== REGISTRAR PRE-VENTA ===== */
   const handleRegistrarPreVenta = async () => {
     if (procesando) return; 
     setProcesando(true);

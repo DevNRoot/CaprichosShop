@@ -10,8 +10,6 @@ export default function MantColor() {
 
   const [nombreColor, setNombreColor] = useState("");
   const [hexadecimal, setHexadecimal] = useState("");
-
-  // CARGAR COLOR (EDICIÓN)
   
   useEffect(() => {
     if (!id) return;
@@ -35,8 +33,6 @@ export default function MantColor() {
 
     cargarColor();
   }, [id]);
-
-  // GUARDAR
   
   const submitColor = async (e) => {
     e.preventDefault();

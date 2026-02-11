@@ -9,8 +9,6 @@ export default function MantCategorias({ id }) {
   const [nombreCategoria, setNombreCategoria] = useState("");
 
   console.log("ID RECIBIDO EN COMPONENTE:", id);
-
-  // CARGAR CATEGORÍA (EDITAR)
  
   useEffect(() => {
     if (!id) return;

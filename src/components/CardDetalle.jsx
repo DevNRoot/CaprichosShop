@@ -80,7 +80,6 @@ export default function CardDetalle() {
 
   if (!producto) return <p>Cargando producto...</p>;
 
-  /* ================= COLORES (SOLO ACTIVOS) ================= */
   const coloresDisponibles = [
     ...new Map(
       variantes
@@ -89,7 +88,6 @@ export default function CardDetalle() {
     ).values(),
   ];
 
-  /* ================= TALLAS (SOLO ACTIVAS) ================= */
   const tallasParaColor = variantes
     .filter(
       (v) =>
@@ -109,7 +107,6 @@ export default function CardDetalle() {
   const deshabilitado =
     !tallaObj || tallaObj.stock === 0 || cantidad > tallaObj.stock;
 
-  /* ================= AGREGAR ================= */
   const handleAgregar = () => {
     if (deshabilitado) return;
 
@@ -134,7 +131,6 @@ export default function CardDetalle() {
 
   return (
     <div className={styles.contentCardDetalle}>
-      {/* ===== TITULO ===== */}
       <div className={styles.contentTituloCardDetalle}>
         <span className={styles.tituloCardDetalle}>
           {producto.nombre}

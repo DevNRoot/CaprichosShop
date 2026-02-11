@@ -9,8 +9,6 @@ export default function MantProductos() {
   const params = useParams();
   const id = params?.id ?? null;
 
-  // ESTADOS
-
   const [categorias, setCategorias] = useState([]);
   const [subCategorias, setSubCategorias] = useState([]);
   const [marcas, setMarcas] = useState([]);

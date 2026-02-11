@@ -11,7 +11,6 @@ export default function MantMarcas() {
   const [nombreMarca, setNombreMarca] = useState("");
   const [loading, setLoading] = useState(false);
 
-  /* CARGAR MARCA (EDITAR) */
   useEffect(() => {
     if (!id) return;
 

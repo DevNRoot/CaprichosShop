@@ -102,7 +102,6 @@ export default function Ventas({
     <div className={Style.contentPreVenta}>
       <h1 className={Style.tituloPreVentas}>Ventas</h1>
 
-      {/* ===== FILTROS FECHA ===== */}
       <div className={Style.filtrosFechas}>
         <label>
           Desde:
@@ -114,7 +113,6 @@ export default function Ventas({
         </label>
       </div>
 
-      {/* ===== MÉTODOS DE PAGO ===== */}
       <div className={Style.filtroMetodosDePago}>
         {["Yape", "Tarjeta", "Efectivo"].map(m => (
           <label key={m}>
@@ -144,7 +142,6 @@ export default function Ventas({
         <span>GANANCIA LÍQUIDA: S/ {gananciaLiquida.toFixed(2)}</span>
       </div>
 
-      {/* ===== GRÁFICOS ===== */}
       <GraficoTopProductos
         ventasFiltradas={ventasFiltradas}
         datosDetalleVenta={datosDetalleVenta}
@@ -159,7 +156,6 @@ export default function Ventas({
         ventasFiltradas={ventasFiltradas}
       />
 
-      {/* ===== TABLA DESKTOP ===== */}
       <table className={Style.tablaGeneral}>
         <thead>
           <tr>
