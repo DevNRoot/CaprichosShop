@@ -10,9 +10,6 @@ export default function MantTalla() {
 
   const [guardarTalla, setGuardarTalla] = useState("");
 
-  // ===============================
-  // CARGAR TALLA (EDICIÓN)
-  // ===============================
   useEffect(() => {
     if (!id) return;
 
@@ -32,9 +29,6 @@ export default function MantTalla() {
     cargarTalla();
   }, [id]);
 
-  // ===============================
-  // GUARDAR
-  // ===============================
   const submitNombresTalla = async (e) => {
     e.preventDefault();
 
@@ -52,13 +46,13 @@ export default function MantTalla() {
 
       alert(
         id
-          ? "✅ Talla actualizada con éxito"
-          : "✅ Talla registrada con éxito"
+          ? " Talla actualizada con éxito"
+          : " Talla registrada con éxito"
       );
 
       router.push("/FormTalla");
     } catch {
-      alert("❌ Error al guardar la talla");
+      alert(" Error al guardar la talla");
     }
   };
 

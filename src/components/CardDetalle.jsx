@@ -27,7 +27,6 @@ export default function CardDetalle() {
   const [tallaSeleccionada, setTallaSeleccionada] = useState(null);
   const [cantidad, setCantidad] = useState(1);
 
-  /* ================= FETCH ================= */
   useEffect(() => {
     if (!id) return;
 
@@ -133,7 +132,6 @@ export default function CardDetalle() {
     setCantidad(1);
   };
 
-  /* ================= RENDER ================= */
   return (
     <div className={styles.contentCardDetalle}>
       {/* ===== TITULO ===== */}
@@ -143,7 +141,6 @@ export default function CardDetalle() {
         </span>
       </div>
 
-      {/* ===== IMAGEN ===== */}
       <div className={styles.contentCardDetalleImagen}>
         <Image
           src={producto.imagen || PLACEHOLDER}
@@ -155,14 +152,12 @@ export default function CardDetalle() {
         />
       </div>
 
-      {/* ===== DESCRIPCION ===== */}
       <div className={styles.contentCardDetalleDescripcion}>
         <h2 className={styles.estiloNombre}>{producto.nombre}</h2>
         <p className={styles.estiloPrecio}>
           S/. {producto.precioVenta}
         </p>
 
-        {/* ===== COLORES ===== */}
         <div className={styles.estiloContentColorDisponibles}>
           {coloresDisponibles.map((color) => (
             <div
@@ -190,7 +185,6 @@ export default function CardDetalle() {
           ))}
         </div>
 
-        {/* ===== TALLAS ===== */}
         <div className={styles.estiloContentTallasDisponibles}>
           {tallasParaColor.map((t) => (
             <div
@@ -214,7 +208,6 @@ export default function CardDetalle() {
           ))}
         </div>
 
-        {/* ===== CANTIDAD + BOTON ===== */}
         <div className={styles.estiloContentAddCar}>
           <div className={styles.estiloContentAddMASMENOS}>
             <div
@@ -250,7 +243,6 @@ export default function CardDetalle() {
         </div>
       </div>
 
-      {/* ===== RELACIONADOS ===== */}
       <h3 className={styles.tituloProductoRelacionado}>
         PRODUCTOS RELACIONADOS
       </h3>

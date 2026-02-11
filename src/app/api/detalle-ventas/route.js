@@ -39,7 +39,7 @@ export async function POST(req) {
 
     return NextResponse.json(detalle, { status: 201 });
   } catch (error) {
-    console.error("❌ detalle-ventas:", error);
+    console.error(" detalle-ventas:", error);
     return NextResponse.json(
       { error: "Error al guardar detalle venta" },
       { status: 500 }

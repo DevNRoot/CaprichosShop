@@ -17,16 +17,14 @@ import { useUsuarioStore } from "@/store/UsuarioStore";
 export default function Header() {
   const router = useRouter();
 
-  // ===============================
   // USUARIO
-  // ===============================
+
   const usuario = useUsuarioStore((s) => s.usuario);
   const cerrarSesion = useUsuarioStore((s) => s.cerrarSesion);
   const cargarUsuario = useUsuarioStore((s) => s.cargarUsuario);
 
-  // ===============================
   // STORES
-  // ===============================
+  
   const setTextoBusqueda = useBusquedaStore((s) => s.setTextoBusqueda);
   const textoBusquedaTemporal = useBusquedaStore(
     (s) => s.textoBusquedaTemporal
@@ -46,23 +44,20 @@ export default function Header() {
   const toggleMenu = useMenuStore((s) => s.toggleMenu);
   const abrirCarrito = useCarritoStore((s) => s.abrirCarrito);
 
-  // ===============================
   // ESTADOS LOCALES
-  // ===============================
+  
   const [mostrarMenuUsuario, setMostrarMenuUsuario] = useState(false);
   const [showAutoComplete, setShowAutoComplete] = useState(false);
   const [productos, setProductos] = useState([]);
 
-  // ===============================
   // CARGAR USUARIO
-  // ===============================
+  
   useEffect(() => {
     cargarUsuario();
   }, [cargarUsuario]);
 
-  // ===============================
   // FETCH PRODUCTOS
-  // ===============================
+  
   useEffect(() => {
     async function loadProductos() {
       try {
@@ -76,16 +71,14 @@ export default function Header() {
     loadProductos();
   }, []);
 
-  // ===============================
   // BUSCADOR
-  // ===============================
+  
   const handleInputChange = (e) => {
     const valor = e.target.value;
 
     setTextoBusquedaTemporalStore(valor);
     setShowAutoComplete(true);
 
-    // 🔑 si borra todo, cancela búsqueda activa
     if (valor === "") {
       setTextoBusqueda("");
     }
@@ -99,7 +92,6 @@ export default function Header() {
 
   return (
     <header className={Style.contenedorHeader}>
-      {/* LOGO + HAMBURGUESA */}
       <div className={Style.containerLogoHamburguesa}>
         <Image
           src="/images/caprichosLogoT.png"
@@ -163,7 +155,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* AUTOCOMPLETE */}
+      {/* AUTOCOMPLETADO */}
       {showAutoComplete && (
         <AutoCompletado
           setShowAutoComplete={setShowAutoComplete}
@@ -172,7 +164,6 @@ export default function Header() {
         />
       )}
 
-      {/* OPCIONES DERECHA */}
       <div className={Style.contenedorHeaderOpciones}>
         <Image
           src="/images/lastCarritoCompras.png"

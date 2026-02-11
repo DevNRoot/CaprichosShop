@@ -3,9 +3,8 @@
 import { create } from "zustand";
 
 export const useUsuarioStore = create((set) => ({
-  usuario: null, // inicial seguro sin crashear
+  usuario: null, 
 
-  // Cargar usuario desde localStorage (solo en client)
   cargarUsuario: () => {
     try {
       if (typeof window !== "undefined") {

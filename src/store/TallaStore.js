@@ -6,7 +6,6 @@ import APP_URL from "../config";
 export const useTallaStore = create((set, get) => ({
   tallas: [],
 
-  // Setter seguro
   setTallas: (update) =>
     set((state) => ({
       tallas:
@@ -15,7 +14,6 @@ export const useTallaStore = create((set, get) => ({
           : update,
     })),
 
-  // Fetch seguro
   fetchTalla: async () => {
     try {
       const res = await fetch(`/api/tallas`);
@@ -26,12 +24,11 @@ export const useTallaStore = create((set, get) => ({
         tallas: Array.isArray(data) ? data : [],
       });
     } catch (error) {
-      console.warn("⚠️ Error cargando tallas:", error.message);
-      set({ tallas: [] }); // fallback seguro
+      console.warn(" Error cargando tallas:", error.message);
+      set({ tallas: [] }); 
     }
   },
 
-  // Actualización manual (sin doble fetch)
   actualizarTalla: async () => {
     try {
       const res = await fetch(`/api/tallas`);
@@ -42,7 +39,7 @@ export const useTallaStore = create((set, get) => ({
         tallas: Array.isArray(data) ? data : [],
       });
     } catch (error) {
-      console.warn("⚠️ Error actualizando tallas:", error.message);
+      console.warn(" Error actualizando tallas:", error.message);
       set({ tallas: [] });
     }
   },

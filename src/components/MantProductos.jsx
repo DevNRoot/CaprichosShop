@@ -9,9 +9,8 @@ export default function MantProductos() {
   const params = useParams();
   const id = params?.id ?? null;
 
-  // ===============================
   // ESTADOS
-  // ===============================
+
   const [categorias, setCategorias] = useState([]);
   const [subCategorias, setSubCategorias] = useState([]);
   const [marcas, setMarcas] = useState([]);
@@ -24,14 +23,10 @@ export default function MantProductos() {
   const [precioVenta, setPrecioVenta] = useState("");
   const [imagen, setImagen] = useState(null);
 
-  // SOLO PARA EDICIÓN
   const [nombreCategoriaEdit, setNombreCategoriaEdit] = useState("");
   const [nombreSubCategoriaEdit, setNombreSubCategoriaEdit] = useState("");
   const [nombreMarcaEdit, setNombreMarcaEdit] = useState("");
 
-  // ===============================
-  // CARGAR DATA BASE
-  // ===============================
   useEffect(() => {
     Promise.all([
       fetch("/api/categorias").then(r => r.json()),
@@ -44,9 +39,6 @@ export default function MantProductos() {
     });
   }, []);
 
-  // ===============================
-  // CARGAR PRODUCTO (EDITAR)
-  // ===============================
   useEffect(() => {
     if (!id) return;
 
@@ -72,9 +64,6 @@ export default function MantProductos() {
     cargarProducto();
   }, [id]);
 
-  // ===============================
-  // FILTRAR SUBCATEGORÍAS
-  // ===============================
   const manejoCategoriaFiltro = (e) => {
     const idCategoria = Number(e.target.value);
 
@@ -86,19 +75,16 @@ export default function MantProductos() {
     setIdSubCategorias("");
   };
 
-  // ===============================
-  // GUARDAR / ACTUALIZAR PRODUCTO
-  // ===============================
   const submitProductos = async (e) => {
     e.preventDefault();
 
     if (!idSubCategorias) {
-      alert("❌ Debes seleccionar una subcategoría");
+      alert(" Debes seleccionar una subcategoría");
       return;
     }
 
     if (!idMarca) {
-      alert("❌ Debes seleccionar una marca");
+      alert(" Debes seleccionar una marca");
       return;
     }
 
@@ -122,24 +108,18 @@ export default function MantProductos() {
     if (!res.ok) {
       const err = await res.json();
       console.error(err);
-      alert("❌ Error al guardar producto");
+      alert(" Error al guardar producto");
       return;
     }
 
-    alert(id ? "✅ Producto actualizado" : "✅ Producto agregado");
+    alert(id ? " Producto actualizado" : " Producto agregado");
     router.push("/FormProductos");
   };
 
-  // ===============================
-  // NAVEGACIÓN EXISTENCIA
-  // ===============================
   const irAMantenimientoExistencia = () => {
     router.push("/MantExistencia");
   };
 
-  // ===============================
-  // RENDER
-  // ===============================
   return (
     <div className={Style.mantProductos}>
       <h1 className={Style.titulo}>

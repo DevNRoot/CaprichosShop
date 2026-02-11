@@ -12,7 +12,6 @@ export const useMarcaStore = create((set, get) => ({
   cambiarEstadoMarca: async (idMarca, estadoActual) => {
     const nuevoEstado = estadoActual === 1 ? 0 : 1;
 
-    // optimistic UI
     set({
       marcas: get().marcas.map((m) =>
         m.idMarca === idMarca ? { ...m, estado: nuevoEstado } : m
@@ -28,7 +27,6 @@ export const useMarcaStore = create((set, get) => ({
     if (!res.ok) {
       console.error("No se pudo actualizar estado en backend");
 
-      // rollback
       set({
         marcas: get().marcas.map((m) =>
           m.idMarca === idMarca

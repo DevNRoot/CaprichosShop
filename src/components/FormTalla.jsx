@@ -15,25 +15,22 @@ export default function FormTalla() {
 
   const router = useRouter();
 
-  // ===============================
   // CARGAR TALLAS
-  // ===============================
+  
   useEffect(() => {
     actualizarTalla();
   }, [actualizarTalla]);
 
-  // ===============================
   // FILTRO
-  // ===============================
+  
   const tallasFiltradas = findTalla.trim()
     ? tallas.filter((t) =>
         t.nombre.toLowerCase().includes(findTalla.toLowerCase())
       )
     : tallas;
 
-  // ===============================
   // NAVEGACIÓN
-  // ===============================
+  
   const irAMantTalla = () => {
     router.push("/MantTalla");
   };
@@ -42,9 +39,8 @@ export default function FormTalla() {
     router.push(`/MantTalla/${id}`);
   };
 
-  // ===============================
   // CAMBIAR ESTADO
-  // ===============================
+  
   const cambiarEstadoTalla = (id, nuevoEstado) => {
     fetch(`/api/tallas/${id}`, {
       method: "PUT",

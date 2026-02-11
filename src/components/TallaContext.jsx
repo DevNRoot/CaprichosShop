@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect } from "react";
 
-// Aquí solo gestionamos el estado, no necesitamos hacer fetch aquí
 export const TallaContext = createContext();
 
 export const TallaProvider = ({ children, initialTallas }) => {

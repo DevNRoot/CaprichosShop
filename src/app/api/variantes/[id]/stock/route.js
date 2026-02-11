@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-/**
- * POST /api/variantes/{id}/stock
- * Descuenta stock SOLO al confirmar venta
- */
 export async function POST(req, { params }) {
   const id = Number(params.id);
   const { cantidad } = await req.json();
@@ -34,7 +30,6 @@ export async function POST(req, { params }) {
     );
   }
 
-  // 🔥 DESCUENTO ATÓMICO
   const varianteActualizada = await prisma.variante.update({
     where: { id },
     data: {
@@ -44,7 +39,6 @@ export async function POST(req, { params }) {
     },
   });
 
-  // 🔄 Recalcular stock total del producto
   await actualizarStockProducto(variante.productoId);
 
   return NextResponse.json({
@@ -53,9 +47,6 @@ export async function POST(req, { params }) {
   });
 }
 
-/* =========================
-   Recalcular stock total
-========================= */
 async function actualizarStockProducto(productoId) {
   const total = await prisma.variante.aggregate({
     where: { productoId },

@@ -4,9 +4,6 @@ import { prisma } from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-/**
- * DELETE /api/pre-ventas/:id
- */
 export async function DELETE(_req, context) {
   try {
     const { id } = await context.params;

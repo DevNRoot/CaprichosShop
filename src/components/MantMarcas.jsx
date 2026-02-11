@@ -11,9 +11,7 @@ export default function MantMarcas() {
   const [nombreMarca, setNombreMarca] = useState("");
   const [loading, setLoading] = useState(false);
 
-  /* ===============================
-     CARGAR MARCA (EDITAR)
-  =============================== */
+  /* CARGAR MARCA (EDITAR) */
   useEffect(() => {
     if (!id) return;
 
@@ -28,7 +26,7 @@ export default function MantMarcas() {
         if (!res.ok) throw new Error("No se pudo cargar la marca");
 
         const data = await res.json();
-        setNombreMarca(data.nombre); // 🔥 AHORA SÍ
+        setNombreMarca(data.nombre);
 
       } catch (error) {
         console.error("Error al cargar marca:", error);
@@ -40,9 +38,6 @@ export default function MantMarcas() {
     cargarMarca();
   }, [id]);
 
-  /* ===============================
-     GUARDAR MARCA
-  =============================== */
   const submitMarcas = async (e) => {
     e.preventDefault();
 
@@ -58,10 +53,10 @@ export default function MantMarcas() {
 
       if (!res.ok) throw new Error();
 
-      alert(id ? "✅ Marca actualizada" : "✅ Marca creada");
+      alert(id ? " Marca actualizada" : " Marca creada");
       router.push("/FormMarcas");
     } catch {
-      alert("❌ Error al guardar la marca");
+      alert(" Error al guardar la marca");
     }
   };
 

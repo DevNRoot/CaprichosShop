@@ -16,16 +16,12 @@ export default function FormMarcas() {
 
   const [findMarca, setFindMarca] = useState("");
 
-  /* ===============================
-     CARGA INICIAL
-  =============================== */
+  /* CARGA INICIAL */
   useEffect(() => {
     actualizarMarcas();
   }, [actualizarMarcas]);
 
-  /* ===============================
-     FILTRADO SEGURO (🔥 evita map error)
-  =============================== */
+  /* FILTRADO SEGURO */
   const marcasFiltradas = Array.isArray(marcas)
     ? findMarca.trim()
       ? marcas.filter((m) =>

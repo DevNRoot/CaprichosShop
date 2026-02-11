@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-/**
- * GET /api/usuarios/{id}
- * Laravel: obtenerUsuarios()
- */
 export async function GET(_req, { params }) {
   const id = Number(params.id);
 
@@ -21,7 +17,6 @@ export async function GET(_req, { params }) {
       id: true,
       nombre: true,
       cargo: true,
-      // no devolvemos clave
     },
   });
 

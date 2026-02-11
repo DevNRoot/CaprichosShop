@@ -18,9 +18,7 @@ export default function Autocompletado({
   );
   const router = useRouter();
 
-  /* =============================
-     FILTRAR MARCAS ACTIVAS
-  ============================= */
+  /* FILTRAR MARCAS ACTIVAS */
   const productosVisibles = useMemo(() => {
     return Array.isArray(productos)
       ? productos.filter(

@@ -13,12 +13,10 @@ function normalizarImagen(src) {
     return src;
   }
 
-  // Ruta relativa sin slash
   if (!src.startsWith("/")) {
     return `/${src}`;
   }
 
-  // Ruta relativa correcta
   return src;
 }
 

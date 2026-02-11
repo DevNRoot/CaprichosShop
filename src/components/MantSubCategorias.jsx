@@ -12,23 +12,16 @@ export default function MantSubCategorias() {
   const [categorias, setCategorias] = useState([]);
   const [idCategoria, setIdCategoria] = useState("");
 
-  // ===============================
-  // NAVEGACIÓN
-  // ===============================
   const irAFormSubCategorias = () => {
     router.push("/FormSubCategorias");
   };
 
-  // ===============================
-  // CARGAR CATEGORÍAS
-  // ===============================
   useEffect(() => {
     fetch("/api/categorias")
       .then(res => res.json())
       .then(data => {
         setCategorias(data);
 
-        // crear → seleccionar primera categoría
         if (!id && data.length > 0) {
           setIdCategoria(String(data[0].id));
         }
@@ -38,9 +31,6 @@ export default function MantSubCategorias() {
       );
   }, [id]);
 
-  // ===============================
-  // CARGAR SUBCATEGORÍA (EDITAR)
-  // ===============================
   useEffect(() => {
     if (!id) return;
 
@@ -61,9 +51,6 @@ export default function MantSubCategorias() {
     cargarSubCategoria();
   }, [id]);
 
-  // ===============================
-  // GUARDAR / ACTUALIZAR
-  // ===============================
   const submitSubCategorias = async (e) => {
     e.preventDefault();
 
@@ -87,14 +74,14 @@ export default function MantSubCategorias() {
 
       alert(
         id
-          ? "✅ Subcategoría actualizada correctamente"
-          : "✅ Subcategoría creada correctamente"
+          ? " Subcategoría actualizada correctamente"
+          : " Subcategoría creada correctamente"
       );
 
       router.push("/FormSubCategorias");
     } catch (error) {
       console.error("Error al guardar subcategoría:", error);
-      alert("❌ Error al guardar la subcategoría");
+      alert(" Error al guardar la subcategoría");
     }
   };
 

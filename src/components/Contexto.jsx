@@ -7,7 +7,6 @@ export const Contexto = createContext();
 export const ContextoProvider = ({ children }) => {
   const [productosFiltrados, setProductosFiltrados] = useState([]);
 
-  // Usamos transición para evitar warnings en React 18
   const actualizarProductosFiltrados = (nuevosProductos) => {
     startTransition(() => {
       setProductosFiltrados(nuevosProductos);

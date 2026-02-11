@@ -15,12 +15,12 @@ export default function FormSubCategorias() {
 
   const router = useRouter();
 
-  /* ================= CARGA INICIAL ================= */
+  /*  CARGA INICIAL  */
   useEffect(() => {
     actualizarSubCategorias();
   }, [actualizarSubCategorias]);
 
-  /* ================= FILTRADO SEGURO ================= */
+  /*  FILTRADO SEGURO */
   const subCategoriasFiltradas = Array.isArray(subCategorias)
     ? findSubCategoria.trim()
       ? subCategorias.filter((sc) =>
@@ -31,7 +31,7 @@ export default function FormSubCategorias() {
       : subCategorias
     : [];
 
-  /* ================= CAMBIAR ESTADO ================= */
+  /*  CAMBIAR ESTADO  */
   const cambiarEstadoSubCategorias = async (id, nuevoEstado) => {
     try {
       await fetch(`/api/subCategorias/${id}`, {
@@ -40,14 +40,13 @@ export default function FormSubCategorias() {
         body: JSON.stringify({ estado: nuevoEstado }),
       });
 
-      // 🔥 RECARGAR LISTA COMPLETA (CLAVE)
       await actualizarSubCategorias();
     } catch (error) {
       console.error("Error al cambiar estado:", error);
     }
   };
 
-  /* ================= RENDER ================= */
+  /*  RENDER  */
   return (
     <div className={Style.formSubCategorias}>
       <h1 className={Style.titulo}>Subcategorías</h1>

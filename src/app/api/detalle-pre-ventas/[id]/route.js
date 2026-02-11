@@ -3,10 +3,6 @@ import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
-/**
- * GET /api/detalle-pre-ventas/{id}
- * Laravel: show()
- */
 export async function GET(_req, { params }) {
   const id = Number(params.id);
 

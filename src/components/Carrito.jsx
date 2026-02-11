@@ -8,7 +8,6 @@ import { useCarritoStore } from "@/store/CarritoStore";
 import { useUsuarioStore } from "@/store/UsuarioStore";
 
 export default function Carrito() {
-  /* ===== STORE ===== */
   const productos = useCarritoStore((s) => s.productos);
   const eliminarProducto = useCarritoStore((s) => s.eliminarProducto);
   const actualizarProducto = useCarritoStore((s) => s.actualizarProducto);
@@ -17,7 +16,6 @@ export default function Carrito() {
 
   const usuario = useUsuarioStore((s) => s.usuario);
 
-  /* ===== STATE ===== */
   const [productoEditandoCantidad, setProductoEditandoCantidad] = useState(null);
   const [productoEditandoPrecio, setProductoEditandoPrecio] = useState(null);
 
@@ -26,7 +24,6 @@ export default function Carrito() {
 
   const [clientes, setClientes] = useState([]);
 
-  // 🔒 BLOQUEO ANTIDOBLE CLICK
   const [procesando, setProcesando] = useState(false);
 
   const puedeEditar =
@@ -35,7 +32,6 @@ export default function Carrito() {
       usuario.cargo
     );
 
-  /* ===== SUBTOTAL ===== */
   const subTotal = productos.reduce(
     (total, p) => total + Number(p.precio) * Number(p.cantidad),
     0
@@ -49,7 +45,6 @@ export default function Carrito() {
       .catch(console.error);
   }, []);
 
-  /* ===== HANDLERS ===== */
   const handleCantidadChange = (index, value) => {
     actualizarProducto(index, {
       ...productos[index],
@@ -66,7 +61,7 @@ export default function Carrito() {
 
   /* ===== REGISTRAR PRE-VENTA ===== */
   const handleRegistrarPreVenta = async () => {
-    if (procesando) return; // 🔒 evita doble envío
+    if (procesando) return; 
     setProcesando(true);
 
     try {
@@ -124,14 +119,14 @@ export default function Carrito() {
         return;
       }
 
-      alert("✅ Pre-venta registrada correctamente");
+      alert(" Pre-venta registrada correctamente");
       vaciarCarrito();
       cerrarCarrito();
     } catch (error) {
       console.error(error);
-      alert("❌ Error de conexión");
+      alert(" Error de conexión");
     } finally {
-      setProcesando(false); // 🔓
+      setProcesando(false); 
     }
   };
 

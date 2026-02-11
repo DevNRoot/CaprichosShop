@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-/**
- * GET /api/variantes
- * Laravel: index()
- */
 export async function GET() {
   const variantes = await prisma.variante.findMany({
     include: {
@@ -23,10 +19,6 @@ export async function GET() {
   return NextResponse.json(variantes);
 }
 
-/**
- * POST /api/variantes
- * Laravel: guardarVariante()
- */
 export async function POST(req) {
   const body = await req.json();
   const { id_producto, id_color, id_talla, stock } = body;
@@ -43,7 +35,6 @@ export async function POST(req) {
     );
   }
 
-  // Buscar variante existente
   const varianteExistente = await prisma.variante.findFirst({
     where: {
       productoId: Number(id_producto),
@@ -52,7 +43,6 @@ export async function POST(req) {
     },
   });
 
-  // Si existe, actualizar stock
   if (varianteExistente) {
     if (varianteExistente.stock === stock) {
       return NextResponse.json(
@@ -79,7 +69,6 @@ export async function POST(req) {
     });
   }
 
-  // Crear nueva variante
   const nuevaVariante = await prisma.variante.create({
     data: {
       productoId: Number(id_producto),
@@ -100,9 +89,6 @@ export async function POST(req) {
   );
 }
 
-/**
- * Utilidad: recalcular stock total del producto
- */
 async function actualizarStockProducto(productoId) {
   const total = await prisma.variante.aggregate({
     where: { productoId: Number(productoId) },

@@ -7,13 +7,11 @@ export const MarcaProvider = ({ children }) => {
   const [marcas, setMarcas] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Función para obtener las marcas
   const obtenerMarcas = async () => {
     try {
       const res = await fetch(`/api/marcas`);
       const data = await res.json();
       
-      // Verifica si los datos son diferentes antes de actualizar el estado
       if (JSON.stringify(data) !== JSON.stringify(marcas)) {
         setMarcas(data);
       }
@@ -24,10 +22,9 @@ export const MarcaProvider = ({ children }) => {
     }
   };
 
-  // Llamamos a obtenerMarcas cuando el componente se monta
   useEffect(() => {
     obtenerMarcas();
-  }, []);  // Solo se ejecuta una vez cuando el componente se monta
+  }, []);  
 
   return (
     <MarcaContext.Provider value={{ marcas, setMarcas, obtenerMarcas, loading }}>

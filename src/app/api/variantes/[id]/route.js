@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-/**
- * GET /api/variantes/{id}
- * Laravel: obtenerVariante()
- */
 export async function GET(_req, { params }) {
   const id = Number(params.id);
 
@@ -26,10 +22,6 @@ export async function GET(_req, { params }) {
   return NextResponse.json(variante);
 }
 
-/**
- * PUT /api/variantes/{id}
- * Laravel: editarVariante()
- */
 export async function PUT(req, { params }) {
   const id = Number(params.id);
   const { stock } = await req.json();
@@ -47,10 +39,6 @@ export async function PUT(req, { params }) {
   });
 }
 
-/**
- * DELETE /api/variantes/{id}
- * Laravel: eliminarVariante()
- */
 export async function DELETE(_req, { params }) {
   const id = Number(params.id);
 

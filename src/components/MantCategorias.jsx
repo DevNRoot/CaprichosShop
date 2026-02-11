@@ -10,9 +10,8 @@ export default function MantCategorias({ id }) {
 
   console.log("ID RECIBIDO EN COMPONENTE:", id);
 
-  // ===============================
   // CARGAR CATEGORÍA (EDITAR)
-  // ===============================
+ 
   useEffect(() => {
     if (!id) return;
 
@@ -37,9 +36,8 @@ export default function MantCategorias({ id }) {
     cargarCategoria();
   }, [id]);
 
-  // ===============================
   // GUARDAR
-  // ===============================
+
   const submitCategories = async (e) => {
     e.preventDefault();
 
@@ -55,10 +53,10 @@ export default function MantCategorias({ id }) {
 
       if (!res.ok) throw new Error();
 
-      alert(id ? "✅ Categoría actualizada" : "✅ Categoría creada");
+      alert(id ? " Categoría actualizada" : " Categoría creada");
       router.push("/FormCategorias");
     } catch {
-      alert("❌ Error al guardar la categoría");
+      alert(" Error al guardar la categoría");
     }
   };
 

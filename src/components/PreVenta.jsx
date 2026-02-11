@@ -15,9 +15,7 @@ export default function PreVenta() {
   
   const [isClient, setIsClient] = useState(false);
 
-  // Fetch data from the API
   useEffect(() => {
-    // Solo ejecutamos la lógica de tamaño de ventana en el cliente
     setIsClient(true);
 
     fetch("/api/clientes").then((r) => r.json()).then(setClientes);
@@ -38,7 +36,6 @@ export default function PreVenta() {
       .then(setDatosDetallePreVenta);
   }, []);
 
-  /* ================= HELPERS ================= */
   const obtenerNombreProducto = (id) =>
     productos.find((p) => p.id === id)?.nombre || "";
 
@@ -89,7 +86,7 @@ export default function PreVenta() {
       const res = await fetch(`/api/pre-ventas/${id}`, { method: "DELETE" });
 
       if (!res.ok) {
-        alert("❌ No se pudo eliminar");
+        alert(" No se pudo eliminar");
         return;
       }
 
@@ -121,7 +118,7 @@ export default function PreVenta() {
       const totalPagos = Number(sumaPagos.toFixed(2));
 
       if (totalPagos !== totalVenta) {
-        alert(`❌ El total es S/${totalVenta} pero los pagos suman S/${totalPagos}`);
+        alert(` El total es S/${totalVenta} pero los pagos suman S/${totalPagos}`);
         return;
       }
 
@@ -137,7 +134,7 @@ export default function PreVenta() {
         }));
 
       if (detalles.length === 0) {
-        alert("❌ Esta pre-venta no tiene detalles");
+        alert(" Esta pre-venta no tiene detalles");
         return;
       }
 
@@ -157,7 +154,7 @@ export default function PreVenta() {
       const data = await res.json().catch(() => null);
 
       if (!res.ok) {
-        alert(`❌ Error al registrar la venta: ${data?.detail || data?.details || ""}`);
+        alert(` Error al registrar la venta: ${data?.detail || data?.details || ""}`);
         return;
       }
 
@@ -169,10 +166,10 @@ export default function PreVenta() {
         return copy;
       });
 
-      alert("✅ Venta confirmada y stock actualizado");
+      alert(" Venta confirmada y stock actualizado");
     } catch (error) {
       console.error(error);
-      alert("❌ Error inesperado");
+      alert(" Error inesperado");
     } finally {
       setProcesando(false);
     }
@@ -182,7 +179,6 @@ export default function PreVenta() {
     <div className={Style.contentPreVenta}>
       <h1 className={Style.tituloPreVentas}>Pre Ventas</h1>
 
-      {/* Mostrar la tabla solo en pantallas grandes */}
       {isClient && window.innerWidth > 768 && (
         <table className={Style.tablaGeneral}>
           <thead>
@@ -289,7 +285,6 @@ export default function PreVenta() {
         </table>
       )}
 
-      {/* Mostrar tarjetas solo en pantallas pequeñas */}
       {isClient && window.innerWidth <= 768 && (
         <div className={Style.ventaCardContainer}>
           {datosPreVenta.map((venta) => (

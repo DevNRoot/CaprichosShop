@@ -13,9 +13,8 @@ export default function FormExistencias() {
 
   const [findExistencia, setFindExistencia] = useState("");
 
-  // ===============================
   // NAVEGACIÓN
-  // ===============================
+
   const irMantExistencia = () => {
     router.push("/MantExistencia");
   };
@@ -24,9 +23,8 @@ export default function FormExistencias() {
     router.push(`/MantExistencia/${id}`);
   };
 
-  // ===============================
   // CARGAR EXISTENCIAS
-  // ===============================
+
   useEffect(() => {
     fetch("/api/variantes")
       .then((response) => response.json())
@@ -36,9 +34,8 @@ export default function FormExistencias() {
       );
   }, [setExistencias]);
 
-  // ===============================
   // FILTRAR EXISTENCIAS
-  // ===============================
+  
   const existenciasFiltradas = findExistencia.trim()
     ? existencias.filter((existencia) =>
         existencia.producto.nombre
@@ -47,9 +44,8 @@ export default function FormExistencias() {
       )
     : existencias;
 
-  // ===============================
   // ELIMINAR EXISTENCIA
-  // ===============================
+  
   const eliminarProducto = (id) => {
     if (!window.confirm("¿Estás seguro de eliminar esta variante?")) return;
 
@@ -102,12 +98,10 @@ export default function FormExistencias() {
             <tr key={existencia.id}>
               <td>{existencia.producto.nombre}</td>
 
-              {/* ✅ CATEGORÍA (PRISMA) */}
               <td>
                 {existencia.producto.subCategoria?.categoria?.nombre || "-"}
               </td>
 
-              {/* ✅ SUBCATEGORÍA (PRISMA) */}
               <td>
                 {existencia.producto.subCategoria?.nombre || "-"}
               </td>

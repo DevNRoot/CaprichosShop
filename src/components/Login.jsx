@@ -18,7 +18,7 @@ export default function Login() {
     e.preventDefault();
 
     if (!usuarioSeleccionado || !clave) {
-      alert("❌ Debes seleccionar un usuario y escribir la clave");
+      alert(" Debes seleccionar un usuario y escribir la clave");
       return;
     }
 
@@ -37,22 +37,20 @@ export default function Login() {
       const data = await response.json();
 
       if (!response.ok) {
-        alert("❌ " + (data?.message || "Credenciales incorrectas"));
+        alert(" " + (data?.message || "Credenciales incorrectas"));
         return;
       }
 
-      // ✅ ACTUALIZA ZUSTAND (header se re-renderiza)
       iniciarSesion(data.usuario);
 
-      // Guardar token
       localStorage.setItem("token", data.token);
 
-      alert("✅ Inicio de sesión exitoso");
+      alert(" Inicio de sesión exitoso");
       cerrarLogin();
 
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
-      alert("⚠️ Error interno del servidor");
+      alert(" Error interno del servidor");
     }
   };
 

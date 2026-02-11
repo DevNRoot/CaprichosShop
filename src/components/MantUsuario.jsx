@@ -41,10 +41,10 @@ export default function MantUsuario() {
 
       if (!response.ok) throw new Error();
 
-      alert(id ? "✅ Usuario actualizado con éxito" : "✅ Usuario registrado con éxito");
+      alert(id ? " Usuario actualizado con éxito" : " Usuario registrado con éxito");
       router.push("/formUsuarios");
     } catch (error) {
-      alert("❌ Error al guardar usuario");
+      alert(" Error al guardar usuario");
     }
   };
 

@@ -4,7 +4,6 @@ import { prisma } from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-/* ================= GET ================= */
 export async function GET() {
   try {
     const marcas = await prisma.marca.findMany({
@@ -29,7 +28,6 @@ export async function GET() {
   }
 }
 
-/* ================= POST ================= */
 export async function POST(req) {
   try {
     const { nombre } = await req.json();

@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-/**
- * GET /api/categorias/{id}
- */
+
 export async function GET(_req, context) {
   const params = await context.params; 
   const id = Number(params.id);
@@ -29,9 +27,7 @@ export async function GET(_req, context) {
   return NextResponse.json(categoria);
 }
 
-/**
- * PUT /api/categorias/{id}
- */
+
 export async function PUT(req, context) {
   const params = await context.params; 
   const id = Number(params.id);

@@ -19,12 +19,10 @@ export default function GraficoLinealProducto({
 }) {
   const [productoSeleccionado, setProductoSeleccionado] = useState("");
 
-  // 🔹 SOLO detalles de ventas filtradas
   const detallesFiltrados = detalleVentas.filter((detalle) =>
     ventasFiltradas.some((venta) => venta.id === detalle.ventaId)
   );
 
-  // 🔹 SOLO el producto seleccionado
   const detallesProducto = detallesFiltrados.filter(
     (detalle) => detalle.productoId === productoSeleccionado
   );

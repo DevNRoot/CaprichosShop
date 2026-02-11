@@ -2,10 +2,6 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 
-/**
- * GET /api/usuarios
- * Laravel: index()
- */
 export async function GET() {
   try {
     const usuarios = await prisma.usuario.findMany({
@@ -13,7 +9,6 @@ export async function GET() {
         id: true,
         nombre: true,
         cargo: true,
-        // no devolvemos clave
       },
       orderBy: { id: "desc" },
     });
@@ -27,10 +22,7 @@ export async function GET() {
   }
 }
 
-/**
- * POST /api/usuarios
- * Laravel: guardarUsuarios()
- */
+
 export async function POST(req) {
   try {
     const body = await req.json();
@@ -67,7 +59,6 @@ export async function POST(req) {
       },
     });
 
-    // no devolver clave
     const { clave: _clave, ...userSafe } = usuario;
 
     return NextResponse.json(

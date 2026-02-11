@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-/**
- * GET /api/clientes
- */
+
 export async function GET() {
   const clientes = await prisma.cliente.findMany({
     select: {
@@ -16,10 +14,7 @@ export async function GET() {
   return NextResponse.json(clientes);
 }
 
-/**
- * POST /api/clientes
- * ✅ DEVUELVE EL CLIENTE COMPLETO
- */
+
 export async function POST(req) {
   const body = await req.json();
   const { nombre, documento } = body;

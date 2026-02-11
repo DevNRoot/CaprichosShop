@@ -10,9 +10,6 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// ===============================
-// GET
-// ===============================
 export async function GET() {
   const productos = await prisma.producto.findMany({
     include: {
@@ -24,9 +21,6 @@ export async function GET() {
   return NextResponse.json(productos);
 }
 
-// ===============================
-// POST
-// ===============================
 export async function POST(req) {
   try {
     const formData = await req.formData();

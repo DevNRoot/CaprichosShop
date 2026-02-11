@@ -31,7 +31,7 @@ export async function POST(req) {
       data: {
         nombre,
         hexadecimal: hexadecimal || null,
-        estado: 1, // ✅ SIEMPRE ACTIVO
+        estado: 1, 
       },
     });
 

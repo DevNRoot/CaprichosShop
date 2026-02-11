@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-/**
- * POST /api/ventas
- */
 export async function POST(req) {
   try {
     const {
@@ -31,7 +28,6 @@ export async function POST(req) {
     }
 
     await prisma.$transaction(async (tx) => {
-      // 1️⃣ Crear venta
       const venta = await tx.venta.create({
         data: {
           fecha: new Date(fecha),
@@ -41,10 +37,8 @@ export async function POST(req) {
         },
       });
 
-      // Para recalcular stock_total una sola vez por producto
       const productosAActualizar = new Set();
 
-      // 2️⃣ Detalles + descuento de stock
       for (const d of detalles) {
         const productoId = Number(d.productoId);
         const colorId = Number(d.colorId);
@@ -67,13 +61,11 @@ export async function POST(req) {
           );
         }
 
-        // 🔻 Descontar stock de la variante
         await tx.variante.update({
           where: { id: variante.id },
           data: { stock: { decrement: cantidad } },
         });
 
-        // Crear detalle de venta
         await tx.detalleVenta.create({
           data: {
             ventaId: venta.id,
@@ -88,7 +80,6 @@ export async function POST(req) {
         productosAActualizar.add(productoId);
       }
 
-      // 3️⃣ Recalcular stock_total de los productos afectados
       for (const productoId of productosAActualizar) {
         const totalStock = await tx.variante.aggregate({
           where: { productoId },
@@ -103,7 +94,6 @@ export async function POST(req) {
         });
       }
 
-      // 4️⃣ Eliminar preventa
       await tx.detallePreVenta.deleteMany({
         where: { preVentaId: Number(preVentaId) },
       });
@@ -114,11 +104,11 @@ export async function POST(req) {
     });
 
     return NextResponse.json(
-      { message: "✅ Venta registrada correctamente y stock actualizado" },
+      { message: " Venta registrada correctamente y stock actualizado" },
       { status: 201 }
     );
   } catch (error) {
-    console.error("❌ ERROR VENTA:", error);
+    console.error(" ERROR VENTA:", error);
 
     return NextResponse.json(
       {
@@ -130,9 +120,6 @@ export async function POST(req) {
   }
 }
 
-/**
- * GET /api/ventas
- */
 export async function GET() {
   try {
     const ventas = await prisma.venta.findMany({
@@ -152,7 +139,7 @@ export async function GET() {
 
     return NextResponse.json(ventas);
   } catch (error) {
-    console.error("❌ ERROR GET VENTAS:", error);
+    console.error(" ERROR GET VENTAS:", error);
 
     return NextResponse.json(
       {

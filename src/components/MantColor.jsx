@@ -11,9 +11,8 @@ export default function MantColor() {
   const [nombreColor, setNombreColor] = useState("");
   const [hexadecimal, setHexadecimal] = useState("");
 
-  // ===============================
   // CARGAR COLOR (EDICIÓN)
-  // ===============================
+  
   useEffect(() => {
     if (!id) return;
 
@@ -37,9 +36,8 @@ export default function MantColor() {
     cargarColor();
   }, [id]);
 
-  // ===============================
   // GUARDAR
-  // ===============================
+  
   const submitColor = async (e) => {
     e.preventDefault();
 
@@ -60,13 +58,13 @@ export default function MantColor() {
 
       alert(
         id
-          ? "✅ Color actualizado con éxito"
-          : "✅ Color registrado con éxito"
+          ? " Color actualizado con éxito"
+          : " Color registrado con éxito"
       );
 
       router.push("/FormColores");
     } catch {
-      alert("❌ Error al guardar el color");
+      alert(" Error al guardar el color");
     }
   };
 

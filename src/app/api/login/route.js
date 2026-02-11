@@ -1,15 +1,11 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-/**
- * POST /api/login
- */
 export async function POST(req) {
   try {
     const body = await req.json();
     const { nombre, clave } = body;
 
-    // ✅ Validación básica
     if (
       !nombre ||
       typeof nombre !== "string" ||
@@ -22,7 +18,6 @@ export async function POST(req) {
       );
     }
 
-    // 🔍 Buscar usuario (SIN mode: insensitive)
     const usuario = await prisma.Usuario.findFirst({
       where: {
         nombre: nombre
@@ -37,7 +32,6 @@ export async function POST(req) {
       );
     }
 
-    // 🔐 Comparación directa (DEV)
     if (clave !== usuario.clave) {
       return NextResponse.json(
         { message: "Credenciales inválidas" },
@@ -45,10 +39,8 @@ export async function POST(req) {
       );
     }
 
-    // ❌ Nunca devolver la clave
     const { clave: _, ...usuarioSeguro } = usuario;
 
-    // ✅ Login OK
     return NextResponse.json(
       {
         message: "Login exitoso",
@@ -58,8 +50,7 @@ export async function POST(req) {
       { status: 200 }
     );
   } catch (error) {
-    // console.error("LOGIN ERROR:", error);
-    console.error("🔥 LOGIN ERROR COMPLETO 🔥");
+    console.error(" LOGIN ERROR COMPLETO ");
   console.error(error);
   console.error("message:", error?.message);
   console.error("stack:", error?.stack);

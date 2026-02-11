@@ -6,7 +6,6 @@ export const SubCategoriasContext = createContext();
 export const SubCategoriasProvider = ({ children, initialSubCategorias }) => {
   const [subCategorias, setSubCategorias] = useState(initialSubCategorias);
 
-  // Función para actualizar subcategorías en el cliente si es necesario
   const actualizarSubCategorias = async () => {
     try {
       const res = await fetch(`/api/subCategorias`);
@@ -26,7 +25,6 @@ export const SubCategoriasProvider = ({ children, initialSubCategorias }) => {
   );
 };
 
-// Usamos getServerSideProps para obtener los datos en cada solicitud
 export async function getServerSideProps() {
   try {
     const res = await fetch(`/api/subCategorias`);
@@ -34,6 +32,6 @@ export async function getServerSideProps() {
     return { props: { initialSubCategorias: subCategorias } };
   } catch (error) {
     console.error('Error al obtener subcategorías:', error);
-    return { props: { initialSubCategorias: [] } }; // Devuelve un array vacío en caso de error
+    return { props: { initialSubCategorias: [] } }; 
   }
 }

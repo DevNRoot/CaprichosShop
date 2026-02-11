@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-/**
- * GET /api/tallas/{id}
- */
 export async function GET(req) {
   try {
     const id = Number(req.nextUrl.pathname.split("/").pop());
@@ -35,9 +32,6 @@ export async function GET(req) {
   }
 }
 
-/**
- * PUT /api/tallas/{id}
- */
 export async function PUT(req) {
   try {
     const id = Number(req.nextUrl.pathname.split("/").pop());

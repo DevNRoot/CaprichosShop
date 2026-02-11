@@ -27,18 +27,18 @@ export default function Main() {
 
   const goToCatalogo = (genero, subcategoriaId = null) => {
     if (subcategoriaId) {
-      router.push(`/catalogo/${genero}/${subcategoriaId}`);  // Navegamos a la subcategoría
+      router.push(`/catalogo/${genero}/${subcategoriaId}`);  
     } else {
-      router.push(`/catalogo/${genero}`);  // Navegamos a la categoría sin subcategoría
+      router.push(`/catalogo/${genero}`);  
     }
   };
 
   const handleLeftClick = (setIndex, currentIndex, items) => {
-    setIndex(currentIndex === 0 ? items.length - 6 : currentIndex - 1);  // Controla el índice de izquierda a derecha
+    setIndex(currentIndex === 0 ? items.length - 6 : currentIndex - 1); 
   };
 
   const handleRightClick = (setIndex, currentIndex, items) => {
-    setIndex(currentIndex + 1 >= items.length - 5 ? 0 : currentIndex + 1);  // Controla el índice de derecha a izquierda
+    setIndex(currentIndex + 1 >= items.length - 5 ? 0 : currentIndex + 1); 
   };
 
   return (
@@ -77,8 +77,8 @@ export default function Main() {
                     src={`${API_URL}/storage/${item.imagen}` || '/images/placeholder.jpg'}
                     className={Style.imagenWoman}
                     alt={item.nombre || 'Imagen de categoría'}
-                    width={200}  // Asigna un tamaño de imagen adecuado
-                    height={200}  // Asigna un tamaño de imagen adecuado
+                    width={200}  
+                    height={200}  
                   />
                 ) : (
                   <div className={Style.placeholder}></div>
@@ -133,8 +133,8 @@ export default function Main() {
                     src={`${API_URL}/storage/${item.imagen}` || '/images/placeholder.jpg'}
                     className={Style.imagenWoman}
                     alt={item.nombre || 'Imagen de categoría'}
-                    width={200}  // Asigna un tamaño de imagen adecuado
-                    height={200}  // Asigna un tamaño de imagen adecuado
+                    width={200}  
+                    height={200}  
                   />
                 ) : (
                   <div className={Style.placeholder}></div>

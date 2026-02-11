@@ -54,7 +54,7 @@ export default function ClientLayout({ children }) {
               position: "fixed",
               inset: 0,
               backgroundColor: "rgba(0,0,0,0.5)",
-              zIndex: 1000, // 👈 MENOR que el carrito
+              zIndex: 1000, 
             }}
           />
 

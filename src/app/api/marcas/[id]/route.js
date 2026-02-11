@@ -4,13 +4,9 @@ import { prisma } from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-/* ===============================
-   GET /api/marcas/:id
-   (CARGAR MARCA PARA EDITAR)
-================================ */
 export async function GET(req, context) {
   try {
-    const { id } = await context.params; // 🔥 params es Promise
+    const { id } = await context.params;
     const idMarca = Number(id);
 
     if (isNaN(idMarca)) {
@@ -46,10 +42,6 @@ export async function GET(req, context) {
   }
 }
 
-/* ===============================
-   PUT /api/marcas/:id
-   (ACTUALIZAR MARCA)
-================================ */
 export async function PUT(req, context) {
   try {
     const { id } = await context.params;

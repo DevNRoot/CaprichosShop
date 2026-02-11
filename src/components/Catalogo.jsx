@@ -66,7 +66,7 @@ export default function Catalogo() {
 
   return (
     <div className={Styles.divCatalogo}>
-      {/* FILTRO MOBILE */}
+     
       {!textoBusquedaTemporal &&
         !textoBusqueda &&
         !buscadorActivo && (
@@ -80,12 +80,10 @@ export default function Catalogo() {
           </div>
         )}
 
-      {/* FILTRO DESKTOP */}
       <div className={Styles.containerFiltradoDesktop}>
         <Filtrado />
       </div>
 
-      {/* MODAL FILTRO MOBILE */}
       {openFiltro && (
         <div className={Styles.modalFiltro}>
           <div className={Styles.modalContent}>

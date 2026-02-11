@@ -3,10 +3,6 @@ import { prisma } from "@/lib/prisma";
 
 export const runtime = "nodejs";
 
-/**
- * GET /api/subCategorias
- * Laravel: index()
- */
 export async function GET() {
   try {
     const subCategorias = await prisma.subCategoria.findMany({
@@ -33,10 +29,6 @@ export async function GET() {
   }
 }
 
-/**
- * POST /api/subCategorias
- * Laravel: guardarSubCategorias()
- */
 export async function POST(req) {
   try {
     const body = await req.json();

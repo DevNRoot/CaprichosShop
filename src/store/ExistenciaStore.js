@@ -6,7 +6,6 @@ import APP_URL from "../config";
 export const useExistenciaStore = create((set, get) => ({
   existencias: [],
 
-  // Setter seguro
   setExistencias: (update) =>
     set((state) => ({
       existencias:
@@ -15,7 +14,6 @@ export const useExistenciaStore = create((set, get) => ({
           : update,
     })),
 
-  // Fetch inicial (solo una vez)
   fetchExistencias: async () => {
     try {
       const res = await fetch(`/api/variantes`);
@@ -26,12 +24,11 @@ export const useExistenciaStore = create((set, get) => ({
         existencias: Array.isArray(data) ? data : [],
       });
     } catch (error) {
-      console.warn("⚠️ Error cargando existencias:", error.message);
-      set({ existencias: [] }); // fallback para evitar crashes
+      console.warn(" Error cargando existencias:", error.message);
+      set({ existencias: [] }); 
     }
   },
 
-  // Actualización manual (sin doble fetch)
   actualizarExistencias: async () => {
     try {
       const res = await fetch(`/api/variantes`);
@@ -42,7 +39,7 @@ export const useExistenciaStore = create((set, get) => ({
         existencias: Array.isArray(data) ? data : [],
       });
     } catch (error) {
-      console.warn("⚠️ Error actualizando existencias:", error.message);
+      console.warn(" Error actualizando existencias:", error.message);
       set({ existencias: [] });
     }
   },

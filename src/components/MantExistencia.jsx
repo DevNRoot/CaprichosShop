@@ -7,9 +7,8 @@ import Style from "./mantExistencia.module.css";
 export default function MantExistencia() {
   const router = useRouter();
 
-  // ===============================
   // ESTADOS
-  // ===============================
+  
   const [categorias, setCategorias] = useState([]);
   const [subCategorias, setSubCategorias] = useState([]);
   const [productos, setProductos] = useState([]);
@@ -26,9 +25,8 @@ export default function MantExistencia() {
   const [idTalla, setIdTalla] = useState("");
   const [cantidad, setCantidad] = useState("");
 
-  // ===============================
   // CARGA INICIAL
-  // ===============================
+  
   useEffect(() => {
     Promise.all([
       fetch("/api/categorias").then(r => r.json()),
@@ -45,9 +43,8 @@ export default function MantExistencia() {
     });
   }, []);
 
-  // ===============================
   // FILTROS
-  // ===============================
+  
   const cambioCategoria = (e) => {
     const id = Number(e.target.value);
     setIdCategoria(id);
@@ -70,9 +67,8 @@ export default function MantExistencia() {
     );
   };
 
-  // ===============================
-  // GUARDAR EXISTENCIA ✅
-  // ===============================
+  // GUARDAR EXISTENCIA 
+
   const submitExistencia = async (e) => {
     e.preventDefault();
 
@@ -103,9 +99,8 @@ export default function MantExistencia() {
     }
   };
 
-  // ===============================
   // RENDER
-  // ===============================
+
   return (
     <div className={Style.mantExistencia}>
       <h1 className={Style.titulo}>Añadir Existencia</h1>

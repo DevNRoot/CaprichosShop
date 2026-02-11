@@ -8,13 +8,11 @@ export const ExistenciaContext = createContext();
 export const ExistenciaProvider = ({ children }) => {
   const [existencias, setExistencias] = useState([]);
 
-  // Función única para obtener existencias
   const fetchExistencias = async () => {
     try {
       const res = await fetch(`/api/variantes`);
       const data = await res.json();
 
-      // React 18 safe update
       startTransition(() => {
         setExistencias(data);
       });
@@ -23,12 +21,10 @@ export const ExistenciaProvider = ({ children }) => {
     }
   };
 
-  // Para actualizar desde otros componentes
   const actualizarExistencias = async () => {
     await fetchExistencias();
   };
 
-  // Cargar existencias al inicio
   useEffect(() => {
     fetchExistencias();
   }, []);

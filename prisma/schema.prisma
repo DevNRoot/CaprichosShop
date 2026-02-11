@@ -8,10 +8,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-/* =====================
-   CATEGORÍAS
-===================== */
-
 model Categoria {
   id Int @id @default(autoincrement())
   nombre String
@@ -87,10 +83,6 @@ model TipoMovimiento {
   @@map("tipo_movimiento")
 }
 
-/* =====================
-   PRINCIPALES
-===================== */
-
 model Producto {
   id Int @id @default(autoincrement())
   nombre String
@@ -157,10 +149,6 @@ model Cliente {
   @@map("clientes")
 }
 
-/* =====================
-   OPERACIONES
-===================== */
-
 model Compra {
   id Int @id @default(autoincrement())
   total Float
@@ -216,9 +204,6 @@ model MovimientoCaja {
   @@map("movimiento_caja")
 }
 
-/* =====================
-   DETALLES
-===================== */
 
 model DetalleCompra {
   id Int @id @default(autoincrement())
@@ -292,7 +277,6 @@ model Usuario {
   nombre String @unique
   cargo  String
   clave  String
-  // estado Int?   @default(1)
 
   @@map("usuario")
 }

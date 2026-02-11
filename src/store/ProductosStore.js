@@ -21,7 +21,7 @@ export const useProductosStore = create((set) => ({
       const data = await res.json();
       set({ productos: Array.isArray(data) ? data : [] });
     } catch (error) {
-      console.error("❌ Error cargando productos:", error);
+      console.error(" Error cargando productos:", error);
       set({ productos: [] });
     }
   },

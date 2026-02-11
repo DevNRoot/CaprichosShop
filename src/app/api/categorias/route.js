@@ -1,10 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-/**
- * GET /api/categorias
- * Laravel: index()
- */
+
 export async function GET() {
   try {
     const categorias = await prisma.categoria.findMany({
@@ -23,10 +20,7 @@ export async function GET() {
   }
 }
 
-/**
- * POST /api/categorias
- * Laravel: guardado()
- */
+
 export async function POST(req) {
   try {
     const body = await req.json();

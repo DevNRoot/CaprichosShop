@@ -44,7 +44,7 @@ export default function FormProductos() {
     if (res.ok) {
       setProductos(productos.filter((p) => p.id !== id));
     } else {
-      alert("❌ Error al eliminar");
+      alert(" Error al eliminar");
     }
   };
 

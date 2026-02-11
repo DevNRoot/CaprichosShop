@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-/**
- * GET /api/tallas
- * Laravel: index()
- */
 export async function GET() {
   try {
     const tallas = await prisma.talla.findMany();
@@ -17,10 +13,6 @@ export async function GET() {
   }
 }
 
-/**
- * POST /api/tallas
- * Laravel: guardarTalla()
- */
 export async function POST(req) {
   try {
     const body = await req.json();

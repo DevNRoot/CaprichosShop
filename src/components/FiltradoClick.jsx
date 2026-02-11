@@ -22,7 +22,6 @@ export default function FiltradoClick() {
   
   const router = useRouter();
 
-  // Obtener categorías desde la API (se ejecuta solo una vez)
   useEffect(() => {
     fetch(`/api/categorias`)
       .then((response) => response.json())
@@ -30,13 +29,11 @@ export default function FiltradoClick() {
       .catch((error) => console.error('Error al obtener categorías:', error));
   }, []);
   
-  // Obtener subcategorías (se ejecuta solo una vez)
   useEffect(() => {
     fetch(`/api/subCategorias`)
       .then((response) => response.json())
       .then((data) => {
         setSubCategorias(data);
-        // Filtrar subcategorías inmediatamente después de la carga inicial
         if (idCategoria) {
           const subCategoriaFiltro = data.filter(
             (subCategoria) => subCategoria.id_categorias === idCategoria
@@ -45,7 +42,7 @@ export default function FiltradoClick() {
         }
       })
       .catch((error) => console.error('Error al obtener subcategorías:', error));
-  }, [idCategoria]); // Filtramos solo cuando idCategoria cambia
+  }, [idCategoria]); 
   
   const handleShowGeneroData = () => setShowGeneroData(!showGeneroData);
   const handleShowCategoriaData = () => setShowCategoriaData(!showCategoriaData);
@@ -98,7 +95,7 @@ export default function FiltradoClick() {
                   id={`categoria-${categoria.id}`}
                   className="inputRadio"
                   onChange={() => {
-                    setIdCategoria(categoria.id); // Cambiar la categoría seleccionada
+                    setIdCategoria(categoria.id); 
                     const genero = categoria.id === 1 ? 'caballero' : 'dama';
                     setGeneroElegido(genero);
                   }}

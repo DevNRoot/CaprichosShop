@@ -30,7 +30,6 @@ export function GlobalDataProvider({ children }) {
 
         setColores(Array.isArray(coloresData) ? coloresData : []);
 
-        // 🔥 CAMBIO IMPORTANTE AQUÍ
         setTallas(
           Array.isArray(tallasData)
             ? tallasData.filter((t) => t.estado === 1)
@@ -39,7 +38,7 @@ export function GlobalDataProvider({ children }) {
 
         setProductos(Array.isArray(productosData) ? productosData : []);
       } catch (error) {
-        console.error("❌ Error GlobalData:", error);
+        console.error(" Error GlobalData:", error);
         setColores([]);
         setTallas([]);
         setProductos([]);

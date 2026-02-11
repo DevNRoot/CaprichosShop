@@ -7,12 +7,10 @@ export const ProductosProvider = ({ children }) => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Si prefieres cargar los productos solo cuando se renderiza en el cliente, usa useEffect
   useEffect(() => {
     refrescarProductos();
   }, []);
 
-  // Función para refrescar productos
   const refrescarProductos = async () => {
     setLoading(true);
     try {

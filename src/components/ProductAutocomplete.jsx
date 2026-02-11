@@ -31,8 +31,8 @@ export default function ProductAutocomplete({
           src={imagen || "/images/placeholder.jpg"}
           alt={nombre}
           className={estiloImagen}
-          width={80}   // requerido por Next.js
-          height={80}  // requerido por Next.js
+          width={80}   
+          height={80}  
         />
       </div>
 

@@ -8,9 +8,6 @@ cloudinary.config({
   cloudinary_url: process.env.CLOUDINARY_URL,
 });
 
-// ===============================
-// GET PRODUCTO POR ID
-// ===============================
 export async function GET(req) {
   try {
     const id = Number(req.nextUrl.pathname.split("/").pop());
@@ -47,9 +44,6 @@ export async function GET(req) {
   }
 }
 
-// ===============================
-// PUT → ACTUALIZAR PRODUCTO + IMAGEN
-// ===============================
 export async function PUT(req) {
   try {
     const id = Number(req.nextUrl.pathname.split("/").pop());
@@ -108,9 +102,6 @@ export async function PUT(req) {
   }
 }
 
-// ===============================
-// DELETE PRODUCTO
-// ===============================
 export async function DELETE(req) {
   try {
     const id = Number(req.nextUrl.pathname.split("/").pop());

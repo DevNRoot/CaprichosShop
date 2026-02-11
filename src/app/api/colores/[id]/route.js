@@ -1,11 +1,8 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-/* ===============================
-   GET /api/colores/[id]
-=============================== */
 export async function GET(_req, { params }) {
-  const { id } = await params; // 🔥 CLAVE
+  const { id } = await params; 
 
   const colorId = Number(id);
   if (isNaN(colorId)) {
@@ -29,12 +26,9 @@ export async function GET(_req, { params }) {
   return NextResponse.json(color);
 }
 
-/* ===============================
-   PUT /api/colores/[id]
-=============================== */
 export async function PUT(req, { params }) {
   try {
-    const { id } = await params; // 🔥 CLAVE
+    const { id } = await params;
     const colorId = Number(id);
     const body = await req.json();
 
