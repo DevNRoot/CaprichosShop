@@ -166,17 +166,27 @@ export async function POST(req) {
   }
 }
 
-export async function GET() {
+export async function GET(req) {
   try {
-    const prueba = await prisma.$queryRaw`
-      SELECT id, id_cliente
-      FROM ventas
-      WHERE id_cliente IS NULL
-    `;
+    const { searchParams } = new URL(req.url);
+
+    const desde = searchParams.get("desde");
+    const hasta = searchParams.get("hasta");
+
+    const where = {};
+
+    if (desde && hasta) {
+      where.fecha = {
+        gte: new Date(`${desde}T00:00:00`),
+        lt: new Date(`${hasta}T23:59:59.999`),
+      };
+    }
 
     const ventas = await prisma.venta.findMany({
+      where,
+
       orderBy: {
-        id: "desc",
+        fecha: "desc",
       },
 
       include: {

@@ -6,6 +6,7 @@ import Image from "next/image";
 import Style from "./login.module.css";
 import { useLoginStore } from "@/store/LoginStore";
 import { useUsuarioStore } from "@/store/UsuarioStore";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const cerrarLogin = useLoginStore((state) => state.cerrarLogin);
@@ -16,6 +17,8 @@ export default function Login() {
 
   const [bloqueadoHasta, setBloqueadoHasta] = useState(null);
   const [minutosRestantes, setMinutosRestantes] = useState(0);
+
+  const router = useRouter();
 
   useEffect(() => {
     const bloqueoGuardado = localStorage.getItem("loginBloqueadoHasta");
@@ -113,7 +116,7 @@ export default function Login() {
       iniciarSesion(data.usuario);
 
       alert("Inicio de sesión exitoso");
-      cerrarLogin();
+      router.push("/");
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
       alert("Error interno del servidor");
