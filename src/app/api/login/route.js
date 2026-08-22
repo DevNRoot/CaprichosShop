@@ -162,7 +162,7 @@ export async function POST(req) {
       },
       process.env.JWT_SECRET,
       {
-        expiresIn: "8h",
+        expiresIn: "13h",
       }
     );
 
@@ -181,7 +181,7 @@ export async function POST(req) {
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       path: "/",
-      maxAge: 60 * 60 * 8,
+      maxAge: 60 * 60 * 13,
     });
 
     return response;

@@ -188,7 +188,7 @@ export default function Header() {
         )}
       </div>
 
-        {usuario ? (
+        {usuario && (
           <div className={Style.usuarioInfo}>
             <Image
               src="/images/userIconHeaderP.png"
@@ -198,7 +198,10 @@ export default function Header() {
               height={40}
               onClick={() => setMostrarMenuUsuario(!mostrarMenuUsuario)}
             />
-            <span className={Style.nombreUsuario}>{usuario.nombre}</span>
+
+            <span className={Style.nombreUsuario}>
+              {usuario.nombre}
+            </span>
 
             {mostrarMenuUsuario && (
               <div className={Style.menuUsuario}>
@@ -214,13 +217,6 @@ export default function Header() {
               </div>
             )}
           </div>
-        ) : (
-          <button
-            className={Style.btnIniciarSesion}
-            onClick={abrirLogin}
-          >
-            Inicia Sesión
-          </button>
         )}
       </div>
     </header>
