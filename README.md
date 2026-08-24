@@ -1,33 +1,33 @@
-# Sistema de Gestión de Inventario – Tienda de Ropa
+# CaprichosShop
 
-Aplicación web desarrollada como proyecto personal con enfoque en desarrollo Frontend, orientada a la gestión de inventario de una tienda de ropa.
-Permite administrar productos, controlar stock y organizar la información de manera eficiente.
+Full-stack sales and inventory management system built for a retail business.
 
-## Tecnologías utilizadas
+CaprichosShop is a web application designed to manage day-to-day business operations, including products, inventory, sales, customers and electronic invoicing.
+
+## Features
+
+- Product and inventory management
+- Stock control
+- Sales management
+- Customer management
+- Private administration
+- Authentication
+- Electronic invoicing integration
+- Database management
+- Responsive web interface
+
+## Technologies
 
 - Next.js
-- Tailwind CSS / CSS
+- React
+- TypeScript
+- JavaScript
+- Prisma
 - Supabase
-- Git y GitHub
+- Tailwind CSS
+- Git & GitHub
+- Vercel
 
-## Funcionalidades principales
+## Live Demo
 
-- Registro y gestión de productos
-- Control de stock
-- Listado y visualización de inventario
-- Interfaz web responsive
-- Conexión con base de datos
-
-## Instalación y ejecución
-
-1. Clonar el repositorio:
-git clone https://github.com/DevNRoot/CaprichosShop.git
-
-2. Instalar dependencias:
-npm install
-
-3. Ejecutar el proyecto en modo desarrollo:
-npm run dev
-
-4. Abrir en el navegador:
-http://localhost:3000
+[Visit CaprichosShop](https://caprichos-shop.vercel.app)
