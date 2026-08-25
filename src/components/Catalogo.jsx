@@ -280,11 +280,11 @@ export default function Catalogo() {
 
     variantes.forEach((variante) => {
       const productoId = String(
-        variante.id_producto
+        variante.productoId
       );
 
       const colorId = String(
-        variante.id_color
+        variante.colorId
       );
 
       if (!mapa.has(productoId)) {
