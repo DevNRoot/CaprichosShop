@@ -3,19 +3,16 @@
 } */
 
 .contenedorHeader {
-  /* border: 2px solid blue; */
-  background-image: none;
-  height: 130px;
-  /* background-color: black; */
   background-color: white;
   border-bottom: 2px solid rgba(128, 128, 128, 0.263);
 
   display: flex;
   align-items: center;
+  justify-content: space-between; 
 
-  width: 1530px;
+  width: 100%; 
   height: 90px;
-  height: 90px;
+  padding: 0 20px; 
   position: fixed;
   z-index: 10;
   top: 0px;
@@ -62,16 +59,14 @@
 }
 
 .contenedorHeaderOpciones {
-  /* border: 2px solid red; */
+  width: 200px;
+  height: 40px;
   display: flex;
   flex-direction: row;
   gap: 10px;
   align-items: center;
-  justify-content: center;
-  width: 230px;
-  height: 40px;
-
-  margin-left: 700px;
+  justify-content: flex-end; 
+  margin-left: 0; 
 }
 
 .iconCarrito {
@@ -205,23 +200,18 @@
 }
 
 .containerLogoHamburguesa {
-  /* border: 2px solid green; */
-  width: 600px;
-  height: 100px;
+  width: 200px; 
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 
 .buscadorPrendas {
-  /* border: 2px solid black; */
-  /* width: 650px; */
-  width: 800px;
+  position: static; 
+  flex: 1; 
+  max-width: 600px; 
   height: 50px;
-
-  position: absolute;
-  left: 425px;
-
   display: flex;
   align-items: center;
   justify-content: center;
