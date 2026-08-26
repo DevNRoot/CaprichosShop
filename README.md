@@ -1,6 +1,6 @@
 # CaprichosShop
 
-Full-stack sales and inventory management system built for a retail business.
+Full-stack sales and inventory management system built for a real retail business.
 
 CaprichosShop is a web application designed to manage day-to-day business operations, including products, inventory, sales, customers and electronic invoicing.
 
@@ -31,3 +31,5 @@ CaprichosShop is a web application designed to manage day-to-day business operat
 ## Live Demo
 
 [Visit CaprichosShop](https://caprichos-shop.vercel.app)
+
+> **Note:** The application includes a private administrative panel used by the business. For privacy and data protection reasons, this panel is not available in the public demo.
