@@ -443,3 +443,14 @@ model users {
   updated_at        DateTime  @default(now()) @db.Timestamp(6)
   trial621          String?   @db.Char(1)
 }
+
+model correlativos {
+  id               Int    @id @default(autoincrement())
+  ruc_emisor       String @db.VarChar(11)
+  tipo_comprobante String @db.VarChar(2)
+  serie            String @db.VarChar(4)
+  ultimo_numero    BigInt @default(0)
+
+  @@unique([ruc_emisor, tipo_comprobante, serie], map: "correlativos_ruc_tipo_serie_key")
+  @@map("correlativos")
+}
