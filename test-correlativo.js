@@ -6,7 +6,7 @@ async function main() {
       ruc_emisor_tipo_comprobante_serie: {
         ruc_emisor: "10181538703",
         tipo_comprobante: "03",
-        serie: "B001",
+        serie: "B002",
       },
     },
   });
